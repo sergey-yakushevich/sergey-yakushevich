@@ -159,25 +159,41 @@ education:
     end: "2018"
 
 projects:
-  - title: Moyasar payments platform
-    tech_stack: [Ruby on Rails, PostgreSQL, Kafka, Microservices]
+  - title: Liburna
+    category: AI integration
+    image: /images/projects/liburna.jpg
+    stack: Rails 8 · Inertia · React 19
+    description: >-
+      Marketing site for a lean AI crew that embeds agents into Jira, Slack,
+      email and GitHub. Leads qualify themselves through a 60-second evaluation
+      before anyone talks to them.
+    tech_stack: [Ruby on Rails, Inertia, React, Tailwind, Kamal]
     link:
-      label: moyasar.com
-      href: https://moyasar.com
+      label: liburna.cc
+      href: https://liburna.cc/
 
-  - title: Mondido checkout
-    tech_stack: [Ruby on Rails, React, PCI-DSS, 3DS]
+  - title: Sick Stuff Shop
+    category: E-commerce
+    image: /images/projects/sickstuff.jpg
+    stack: Rails 8 · Inertia · React
+    description: >-
+      Storefront for hand-poured resin objects — working lighters and stands,
+      made in small runs. Bilingual catalogue, cart, and a made-to-order
+      customiser.
+    tech_stack: [Ruby on Rails, Inertia, React, SQLite, Kamal]
     link:
-      label: mondido.com
-      href: https://mondido.com
+      label: sickstuff.shop
+      href: https://sickstuff.shop/
 
-  - title: Regate accounting automation
-    tech_stack: [Ruby on Rails, Kafka, AWS, Terraform]
+  - title: Dawn Glasses
+    category: Direct to consumer
+    image: /images/projects/dawn.jpg
+    stack: Rails 8 · Inertia · React
+    description: >-
+      Landing and checkout for red-lens sleep glasses, sold as a seven-night
+      protocol rather than a product. Bundle builder, lens picker, and a
+      money-back guarantee front and centre.
+    tech_stack: [Ruby on Rails, Inertia, React, Motion, Kamal]
     link:
-      label: regate.com
-      href: https://regate.com
-
-  - title: A public Go service
-    tech_stack: [Go (Golang), PostgreSQL]
-    placeholder: true
-    link: null
+      label: trydawn.us
+      href: https://trydawn.us/glasses

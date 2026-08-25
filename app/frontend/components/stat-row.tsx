@@ -42,7 +42,7 @@ export function StatRow() {
       {RESUME.stats.map((stat) => (
         <div
           key={stat.label}
-          className="rounded-lg border border-border bg-card p-6"
+          className="rounded-lg border border-border bg-card/80 p-6"
         >
           <dd className="text-3xl font-semibold tracking-tight text-foreground">
             <Ticker value={stat.value} suffix={stat.suffix} />

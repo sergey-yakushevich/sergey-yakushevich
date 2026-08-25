@@ -49,10 +49,10 @@ export function ArticlePreviewCard({
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={cn("w-full", className)}
+      className={cn("h-full w-full", className)}
     >
-      <Card className="group w-full gap-0 overflow-hidden p-0 transition-colors hover:border-foreground/25">
-        <Link href={href} className="block focus-visible:outline-none">
+      <Card className="group h-full w-full gap-0 overflow-hidden bg-card/80 p-0 backdrop-blur-sm transition-colors hover:border-foreground/25">
+        <Link href={href} className="flex h-full flex-col focus-visible:outline-none">
           {coverImage && (
             <motion.div
               initial={{ opacity: 0, scale: 0.98 }}

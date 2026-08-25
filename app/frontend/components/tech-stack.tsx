@@ -9,7 +9,7 @@ export function TechStack() {
       {RESUME.skillGroups.map((group) => (
         <div
           key={group.label}
-          className="rounded-lg border border-border bg-card p-5"
+          className="rounded-lg border border-border bg-card/80 p-5"
         >
           <p className="label-mono">{group.label}</p>
           <div className="mt-3 flex flex-wrap gap-1.5">

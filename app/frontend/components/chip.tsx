@@ -16,11 +16,10 @@ export function Chip({
 }) {
   return (
     <Badge
-      variant="outline"
       className={cn(
-        "font-normal text-muted-foreground",
+        "border-transparent bg-foreground font-medium text-background",
         size === "sm" ? "px-2 py-0 text-[11px]" : "px-2.5 py-0.5 text-xs",
-        signal && "border-signal-shipped/70 text-foreground",
+        signal && "bg-signal-shipped text-white dark:text-background",
         className,
       )}
     >

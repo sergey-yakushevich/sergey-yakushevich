@@ -12,7 +12,11 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <ThemeProvider>
       <TooltipProvider delayDuration={200}>
-        <div className="min-h-screen bg-background">
+        <div className="relative min-h-screen">
+          <div className="page-backdrop">
+            <div className="page-backdrop-image" />
+            <div className="page-backdrop-grid" />
+          </div>
           <div className="mx-auto flex w-full max-w-[910px] flex-col gap-16 px-6 py-10">
             <header className="relative flex items-center justify-center">
               <PillNav />

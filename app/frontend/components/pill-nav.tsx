@@ -29,7 +29,7 @@ export function PillNav() {
               value={item.href}
               asChild
               className={cn(
-                "relative z-0 h-8 flex-none rounded-full border-none bg-transparent px-4 text-sm font-medium shadow-none transition-colors after:hidden data-[state=active]:bg-transparent data-[state=active]:shadow-none",
+                "relative z-0 h-9 flex-none rounded-full border-none bg-transparent nav-text px-4 shadow-none transition-colors after:hidden data-[state=active]:bg-transparent data-[state=active]:shadow-none",
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",

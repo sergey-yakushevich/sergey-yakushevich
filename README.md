@@ -51,7 +51,7 @@ bundle exec kamal rollback <version>
 | Path | What it is |
 |---|---|
 | `/` | Profile, tech stack, stats, experience, recent posts |
-| `/projects` | Project list — title, link and tech stack |
+| `/projects` | Three shipped products, two per row |
 | `/blog` | Post list |
 | `/blog/:slug` | A post |
 | `/agents` | The same CV as plain HTML — no CSS, no JavaScript |
@@ -63,6 +63,7 @@ bundle exec kamal rollback <version>
 | The CV | `content/resume.yml` — one source, read by React *and* the ERB page |
 | Posts | `content/posts/*.md`, YAML front matter, parsed by `app/models/post.rb` |
 | Design tokens | `app/frontend/entrypoints/application.css` |
+| Project screenshots | `public/images/projects/*.jpg` — retake when a site changes |
 | Page shell | `app/frontend/layouts/site-layout.tsx` |
 | Theme wave | `app/frontend/lib/theme.tsx` + the `::view-transition` block in the CSS |
 
@@ -86,6 +87,9 @@ database rows anywhere in the app.
 - **Content** — `/Users/test/Code/cv/src/data/en-batumi-10y-go.tsx`.
 - **Components** — shadcn/ui core, plus `card-01` and `tabs-08` from
   https://shadcnspace.com/components/.
+- **Typeface, type scale and background** — the author's own portfolio,
+  https://github.com/sergey-yakushevich/portfolio (Rubik; 50/40/20/18px scale;
+  aurora image plus a 32px grid).
 - **Theme switch** — ported from the `dawn` project in this workspace.
 
 ## Before it goes live
@@ -94,8 +98,7 @@ database rows anywhere in the app.
    file itself, and they are more visible on a portfolio than on a CV:
    - No Go inside a dated job in the work history, while the headline says
      "Go, Ruby". A reviewer reads the skills list and then looks for the date.
-   - No public personal Go project. The projects grid already renders a fourth,
-     dashed "open slot" card so the gap stays visible instead of forgotten.
+   - No public personal Go project. Every project on the page is Rails.
    - Two `TODO: metric` markers on the Mondido and Regate lead bullets.
 2. **Write posts two and three.**
 

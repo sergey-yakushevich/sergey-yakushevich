@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 
 export function CtaStrip() {
   return (
-    <section className="flex flex-col items-start justify-between gap-4 rounded-lg border border-border bg-card p-6 sm:flex-row sm:items-center">
+    <section className="flex flex-col items-start justify-between gap-4 rounded-lg border border-border bg-card/80 p-6 sm:flex-row sm:items-center">
       <p className="text-sm text-muted-foreground">
         An agent or a recruiter&apos;s parser reading this? There is a
         plain-text version with every detail.

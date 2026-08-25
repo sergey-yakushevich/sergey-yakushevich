@@ -139,16 +139,26 @@ The remaining bullets from the CV sit behind the "Show more" toggle.
 
 ## Projects page
 
-Three project cards from the CV `projects` array: Moyasar payments platform,
-Mondido checkout, Regate accounting automation. Each card carries the title, an
-outbound link, and the tech stack as chips. No prose description — the stack is
-what a reviewer scans for, and a paragraph per project repeats what the
-experience section already says.
+Three shipped products, two per row, each on an adapted `card-24`. The
+descriptions are written from the live sites' own copy, not from memory:
 
-The CV file flags the gap directly: there is no public personal Go project. The
-grid takes a fourth card with no layout change, and that card is the one worth
-building. A payments-shaped service in Go would double as domain proof and
-answer the Go-experience filter at the same time.
+| Project | What it is |
+|---|---|
+| **Liburna** — liburna.cc | Marketing site for a lean AI crew embedding agents into Jira, Slack, email and GitHub. Leads qualify themselves through a 60-second evaluation. |
+| **Sick Stuff Shop** — sickstuff.shop | Storefront for hand-poured resin objects — working lighters and stands. Bilingual catalogue, cart, made-to-order customiser. |
+| **Dawn Glasses** — trydawn.us/glasses | Landing and checkout for red-lens sleep glasses, sold as a seven-night protocol. Bundle builder, lens picker, money-back guarantee. |
+
+All three are Rails 8 + Inertia + React, deployed with Kamal to the same VPS as
+this site. No payment provider is named in the copy because none of the three
+repositories declares one.
+
+Card images are real screenshots of the live sites, captured headlessly and
+cropped 16:9, stored in `public/images/projects/`. Retake them when a site
+changes — a stale screenshot is worse than none.
+
+The employer projects that used to fill this page (Moyasar, Mondido, Regate)
+are gone. They are still on the page, in the experience section, where dated
+employment belongs.
 
 ---
 

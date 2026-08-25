@@ -22,7 +22,7 @@ export function ProfileCard({ avatarUrl }: { avatarUrl?: string | null }) {
   const RESUME = useResume()
 
   return (
-    <section className="rounded-lg border border-border bg-card p-6">
+    <section className="rounded-lg border border-border bg-card/80 p-6 backdrop-blur-sm">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex gap-4">
           <Avatar className="size-24 rounded-lg">
@@ -38,7 +38,7 @@ export function ProfileCard({ avatarUrl }: { avatarUrl?: string | null }) {
 
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">
+              <h1 className="text-3xl font-bold tracking-tight sm:display-1">
                 {RESUME.name}
               </h1>
               {RESUME.available && (
@@ -52,7 +52,7 @@ export function ProfileCard({ avatarUrl }: { avatarUrl?: string | null }) {
               )}
             </div>
 
-            <p className="mt-1 text-sm text-muted-foreground">
+            <p className="mt-2 text-base text-muted-foreground">
               {RESUME.headline} · {RESUME.languages}
             </p>
 

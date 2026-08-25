@@ -29,9 +29,12 @@ export type WorkEntry = {
 
 export type Project = {
   title: string
+  category: string
+  image: string
+  stack: string
+  description: string
   techStack: string[]
-  link: { label: string; href: string } | null
-  placeholder?: boolean
+  link: { label: string; href: string }
 }
 
 export type Education = {

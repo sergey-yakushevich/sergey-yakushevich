@@ -25,14 +25,27 @@ class PagesTest < ActionDispatch::IntegrationTest
     assert_equal [ "Payments" ], signalled.map { |group| group["label"] }
   end
 
-  test "projects carry a tech stack and no prose description" do
+  test "every project is complete enough to render a card" do
     get root_path
     projects = inertia_props.dig("resume", "projects")
 
-    assert_predicate projects, :any?
+    assert_equal 3, projects.size
     projects.each do |project|
       assert_predicate project["techStack"], :any?
-      assert_nil project["description"]
+      assert_predicate project["description"], :present?
+      assert_predicate project["category"], :present?
+      assert_predicate project["stack"], :present?
+      assert_match(%r{\A/images/projects/.+\.jpg\z}, project["image"])
+      assert_match(%r{\Ahttps://}, project.dig("link", "href"))
+    end
+  end
+
+  test "every project image is actually on disk" do
+    get root_path
+
+    inertia_props.dig("resume", "projects").each do |project|
+      path = Rails.public_path.join(project["image"].delete_prefix("/"))
+      assert_predicate path, :exist?, "missing #{project["image"]}"
     end
   end
 

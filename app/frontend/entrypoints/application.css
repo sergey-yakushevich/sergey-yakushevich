@@ -58,7 +58,7 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-sans: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
 
   --color-background: var(--background);
@@ -96,11 +96,11 @@
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Rubik';
   font-style: normal;
-  font-weight: 100 900;
+  font-weight: 300 900;
   font-display: swap;
-  src: url('/fonts/inter.woff2') format('woff2');
+  src: url('/fonts/rubik.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
     U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
     U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -130,6 +130,8 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-synthesis-weight: none;
     text-rendering: optimizeLegibility;
+    font-size: 20px;
+    line-height: 1.5;
   }
 
   ::selection {
@@ -145,13 +147,68 @@
 }
 
 @utility label-mono {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 500;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
   line-height: 1.4;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   color: var(--muted-foreground);
+}
+
+@utility display-1 {
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+@utility display-2 {
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+@utility nav-text {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+@utility page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--background);
+}
+
+@utility page-backdrop-image {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  width: 100%;
+  background-image: url('/images/bg-light.jpg');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: top center;
+  aspect-ratio: 1296 / 1800;
+}
+
+@utility page-backdrop-grid {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%230f172a' stroke-opacity='0.04'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
+  mask-image: linear-gradient(180deg, white, rgba(255, 255, 255, 0));
+}
+
+.dark .page-backdrop-image {
+  background-image: url('/images/bg-dark.jpg');
+  aspect-ratio: 1800 / 1296;
+}
+
+.dark .page-backdrop-grid {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='%23f8fafc' stroke-opacity='0.05'%3E%3Cpath d='M0 .5H31.5V32'/%3E%3C/svg%3E");
 }
 
 ::view-transition-old(root),

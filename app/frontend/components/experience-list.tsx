@@ -12,7 +12,7 @@ function ExperienceEntry({ entry }: { entry: WorkEntry }) {
   const extra = entry.more ?? []
 
   return (
-    <article className="rounded-lg border border-border bg-card p-6">
+    <article className="rounded-lg border border-border bg-card/80 p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <a
           href={entry.link}

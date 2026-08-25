@@ -1,7 +1,7 @@
 import { Head } from "@inertiajs/react"
 
-import { ProjectCard } from "@/components/project-card"
 import { Section } from "@/components/section"
+import { ProjectCard } from "@/components/shadcn-space/card/card-24"
 import SiteLayout from "@/layouts/site-layout"
 import { useResume } from "@/lib/resume"
 
@@ -14,18 +14,22 @@ export default function Projects() {
         <title>{`Projects — ${RESUME.name}`}</title>
         <meta
           name="description"
-          content="Payment platforms, checkout flows and accounting automation built over ten years of backend work."
+          content="Rails and Inertia products shipped end to end — an AI integration studio, a resin storefront, and a direct-to-consumer sleep brand."
         />
       </Head>
 
       <Section
         title="Projects"
-        subtitle="What I built, and what it runs on"
+        subtitle="Shipped, live, and running in production"
         className="pt-2"
       >
-        <div className="grid grid-cols-1 gap-4">
-          {RESUME.projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          {RESUME.projects.map((project, index) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              index={index}
+            />
           ))}
         </div>
       </Section>

@@ -1,8 +1,13 @@
 # Design System
 
-Source of the visual language: **digitalcreator.club** (tokens extracted from its
-compiled stylesheet, not guessed). Source of the page structure: the reference
-portfolio screenshot. Source of the content: `cv/src/data/en-batumi-10y-go.tsx`.
+Sources, in the order they were layered on:
+
+- **Colour tokens** — digitalcreator.club, extracted from its compiled
+  stylesheet, not guessed.
+- **Typeface, type scale and the background** — the author's own portfolio,
+  `github.com/sergey-yakushevich/portfolio`.
+- **Page structure** — the reference portfolio screenshot.
+- **Content** — `cv/src/data/en-batumi-10y-go.tsx`.
 
 The system is deliberately small. One neutral ramp, two fonts, one radius, one
 container width. Colour is used for meaning only, never for decoration.
@@ -99,58 +104,35 @@ used consistently, reads as intent. Ten markers read as noise.
 
 ## 2. Typography
 
-The reference site loads four families but really uses two. Copy those two.
+**Rubik**, self-hosted as a variable font (300–900), taken from the author's
+portfolio along with its type scale. JetBrains Mono is kept for one job only —
+code blocks in blog posts, where a proportional face is wrong.
 
-| Role | Family | Notes |
-|---|---|---|
-| UI and prose | **Inter** | `--font-inter`, variable weight |
-| Labels, code, data | **JetBrains Mono** | `--font-jetbrains`, variable weight |
-
-Load both as self-hosted variable fonts. Do not call Google Fonts at runtime —
-it costs a third-party round trip and hurts the first paint on a page this small.
+Do not call Google Fonts at runtime. It costs a third-party round trip and hurts
+first paint on a page this small.
 
 ### Scale
 
-Standard Tailwind v4 steps. The reference site uses only these seven.
+Straight from the portfolio's `styles.css`, which is why the numbers are round
+pixel values rather than Tailwind steps:
 
-| Step | Size / line height | Applied to |
+| Utility | Value | Applied to |
 |---|---|---|
-| `text-xs` | 12 / 16 | Chip text, footnote |
-| `text-sm` | 14 / 20 | Secondary text, card body, section subtitle |
-| `text-base` | 16 / 24 | Body prose, card heading (`h3`) |
-| `text-lg` | 18 / 28 | Larger card heading |
-| `text-xl` | 20 / 28 | Name in the profile card (mobile) |
-| `text-2xl` | 24 / 32 | Name in the profile card (≥640px) |
-| `text-3xl` | 30 / 36 | Section heading (`h2`) |
+| `display-1` | 50px / 50px, weight 700 | The name in the profile card |
+| `display-2` | 40px, weight 900 | Every section heading (`h2`) |
+| `nav-text` | 18px, weight 700 | The navigation items |
+| body | 20px / 1.5 | Set on `body`; everything inherits it |
+| `label-mono` | 12px, weight 700, uppercase, `+0.06em` | Group labels, dates |
 
-### Exact heading recipes
+Body copy at 20px is the single biggest departure from the first build, which
+used 16px. It is also why the container had to grow — see §3.
 
-Lifted from the reference markup, unchanged:
+### The label
 
-```
-h1  → text-xl font-semibold tracking-tight sm:text-2xl
-h2  → text-3xl font-semibold tracking-tight
-h3  → text-base font-semibold          (card title, with gap-2 icon row)
-h3  → text-lg font-semibold            (larger card title)
-```
-
-`tracking-tight` is `-0.025em`. It is applied to headings **only**. Body text
-uses default tracking.
-
-### The mono label
-
-This is the signature detail of the reference site and the thing that makes the
-whole page feel considered. Every group label uses it:
-
-```
-font-jetbrains text-[10px] font-medium uppercase tracking-[0.05em]
-color: var(--muted-foreground)
-```
-
-Used for: `LANGUAGES`, `BACKEND`, `DATABASE`, `PAYMENTS`, and for every date
-range in the experience list. Positive tracking on tiny uppercase mono is what
-keeps it legible. Do not scale this above 10px, and do not use it for anything
-longer than three words.
+Originally 10px JetBrains Mono. Now Rubik at 12px/700, uppercase, tracked
+`+0.06em`. Same job — `LANGUAGES`, `BACKEND`, `PAYMENTS`, every date range in
+the experience list, the footer — but it belongs to the same family as
+everything else, and 12px clears the small-text floor that 10px did not.
 
 ### Prose rules
 
@@ -170,6 +152,8 @@ longer than three words.
 | Property | Value |
 |---|---|
 | Container | `max-w-[910px]`, centred |
+| Page background | Aurora image + 32px grid, fixed, behind everything |
+| Card surface | `bg-card/80` with `backdrop-blur-sm`, so the aurora shows through |
 | Page padding | `px-6 py-10` |
 | Gap between sections | `gap-16` (64px) |
 | Gap inside a section | `space-y-5` (20px) |
@@ -188,6 +172,22 @@ document rather than a dashboard.
   `LANGUAGES` card left a hole beside the eight-chip `BACKEND` card no matter
   how the heights were handled. Columns pack the cards tightly instead.
 - Everything else: single column at every width.
+
+### Background
+
+Two layers, both lifted from the portfolio, both `position: fixed` and
+`pointer-events: none` so they never intercept a click:
+
+1. **The aurora.** `background.jpg` in light, `background-dark.jpg` in dark —
+   the repo ships both, and the dark one is the photo-negative of the light one.
+   Anchored top-centre at `100% auto`, so it bleeds off the bottom rather than
+   squashing.
+2. **The grid.** A 32×32 inline SVG of a single corner stroke, tiled.
+   `#0f172a` at 4% in light, `#f8fafc` at 5% in dark, masked with
+   `linear-gradient(180deg, white, transparent)` so it fades out down the page.
+
+Cards sit on `bg-card/80` with a small backdrop blur. At full opacity they would
+cover the aurora entirely and the whole layer would be wasted.
 
 ### Elevation
 
@@ -220,7 +220,8 @@ not on this list does not get installed.
 | Item | Where | What was changed |
 |---|---|---|
 | `@shadcn-space/card-01` | Article preview on `/blog` and the home page | Rewritten to take props. The demo's stock photo, lorem body and four-co-author avatar stack are gone — a "+4" bubble on a solo blog is a lie told by a placeholder. Cover image is optional. Staggered entrance kept. |
-| `@shadcn-space/badge-03` | Every tech chip | The registry item is a one-line demo of `<Badge variant="outline">`, so the variant is used directly through the `Chip` wrapper rather than keeping a demo file. |
+| `@shadcn-space/badge-03` | Every tech chip | The registry item is a one-line demo of `<Badge variant="outline">`, so `Badge` is used directly through the `Chip` wrapper rather than keeping a demo file. The outline variant was later dropped for a theme-inverted fill. |
+| `@shadcn-space/card-24` | Project cards | An event card in the registry — date chip, venue, attendee avatars, RSVP button. Rebuilt as a project card: the date chip became a "Live" pill, the clock and pin rows became stack and domain, the attendee stack became tech chips, and the RSVP button became "Visit". `useInView` was replaced with a mount animation for the reason in §6. |
 
 `@shadcn-space/tabs-08` was installed for the tag filter on the blog index. That
 filter is gone, and the navigation uses the shadcn `tabs` primitive directly, so
@@ -275,14 +276,15 @@ Two columns. Left: avatar plus identity. Right: social icon row.
 
 ### Tech chip
 
-shadcn `Badge` with `variant="outline"`: transparent fill, 1px `--border`, fully
-rounded, `--muted-foreground` text at `font-normal`.
+shadcn `Badge`, **inverted against the theme**: `bg-foreground` with
+`text-background`. Dark theme gives a near-white pill with near-black text;
+light theme gives the exact opposite. Fully rounded, no border.
 
 - `md` (tech stack): `px-2.5 py-0.5`, `text-xs`.
-- `sm` (job badges, post tags): `px-2 py-0`, `text-[11px]`.
-- Payments-domain chips take a `--signal-shipped` border and `--foreground`
-  text. A left-edge-only border was tried first and looked like a rendering
-  artifact on a pill — a full outline reads as deliberate.
+- `sm` (job badges, post tags, project cards): `px-2 py-0`, `text-[11px]`.
+- Payments-domain chips fill with `--signal-shipped` instead. The inversion
+  already makes chips high-contrast, so an outline marker would have been
+  invisible — the marker has to be a fill now.
 - Chips do not link anywhere and are not interactive. No hover state.
 
 ### Theme toggle
@@ -362,6 +364,7 @@ message.
 | Nav pill change | Spring `layoutId` slide (stiffness 420, damping 34) |
 | Tab change | Spring indicator, plus a direction-aware panel slide |
 | Article card mounts | 24px rise, cascaded 60ms per list position, then staggered children at 120ms |
+| Project card mounts | 16px rise, cascaded 80ms, then staggered children at 80ms |
 | Hover on any control | Colour only, 150ms |
 | Number ticker | Count up over 900ms on `ease-calm`, on mount |
 | Theme switch | 900ms `clip-path` wave on `ease-calm`, from the click point |
