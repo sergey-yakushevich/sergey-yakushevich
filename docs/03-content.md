@@ -164,7 +164,13 @@ status: published   # or draft
 marker in the list.
 
 `cover_image` is optional and rendered at 16:9. The first post uses the artwork
-from the old portfolio's home page, cropped to keep the figures centred.
+from the old portfolio's home page.
+
+It is a tall 600×877 painting going into a wide slot, so it gets the same
+treatment the portfolio itself uses (`imageWithBlur.css`): the square
+`object-cover` crop sits sharp and centred, over a copy of the same artwork
+scaled to fill and blurred. Cropping straight to 16:9 was tried first and cut
+the sword off the top and the rubble off the bottom — half the composition.
 
 The list page shows title, date and reading time in the mono label style,
 summary, and tags. No excerpt beyond the summary line, no view counter, and no
