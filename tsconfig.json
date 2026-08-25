@@ -1,0 +1,18 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
+  "compilerOptions": {
+    /* Required by shadcn/ui — it reads this file to validate the import alias. */
+    "baseUrl": "./app/frontend",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}

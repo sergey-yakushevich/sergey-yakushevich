@@ -1,0 +1,77 @@
+<% r = Resume.data %>
+<% content_for :title, "#{r[:name]} — #{r[:headline]} (#{r[:languages]}) — plain text" %>
+
+<h1><%= r[:name] %></h1>
+
+<p>
+  <strong><%= r[:headline] %> (<%= r[:languages] %>)</strong><br>
+  <%= r[:location] %><%= " — #{r[:availability_label]}" if r[:available] %><br>
+  <a href="mailto:<%= r[:email] %>"><%= r[:email] %></a>
+</p>
+
+<ul>
+  <% r[:social].each do |link| %>
+    <li><%= link[:name] %>: <a href="<%= link[:url] %>"><%= link[:url] %></a></li>
+  <% end %>
+</ul>
+
+<h2>Summary</h2>
+<% r[:bio].each do |paragraph| %>
+  <p><%= paragraph.delete("*") %></p>
+<% end %>
+
+<h2>Skills</h2>
+<% r[:skill_groups].each do |group| %>
+  <h3><%= group[:label] %></h3>
+  <p><%= group[:chips].join(", ") %></p>
+<% end %>
+
+<h2>Experience</h2>
+<% r[:work].each do |job| %>
+  <h3><%= job[:company] %> — <%= job[:title] %></h3>
+  <p>
+    <%= job[:start] %> to <%= job[:end] %> ·
+    <a href="<%= job[:link] %>"><%= job[:link] %></a>
+  </p>
+  <p><%= job[:badges].join(", ") %></p>
+  <ul>
+    <% (job[:description] + Array(job[:more])).each do |bullet| %>
+      <li><%= bullet %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>Projects</h2>
+<% r[:projects].reject { |project| project[:placeholder] }.each do |project| %>
+  <h3><%= project[:title] %></h3>
+  <p><%= project[:description] %></p>
+  <p><%= project[:tech_stack].join(", ") %></p>
+  <% if project[:link] %>
+    <p><a href="<%= project[:link][:href] %>"><%= project[:link][:label] %></a></p>
+  <% end %>
+<% end %>
+
+<h2>Education</h2>
+<% r[:education].each do |entry| %>
+  <p><%= entry[:degree] %>, <%= entry[:school] %> (<%= entry[:start] %>–<%= entry[:end] %>)</p>
+<% end %>
+
+<% if @posts.any? %>
+  <h2>Writing</h2>
+  <ul>
+    <% @posts.each do |post| %>
+      <li>
+        <a href="<%= post.url %>"><%= post.title %></a>
+        — <%= post.date_label %> — <%= post.summary %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<hr>
+
+<p>
+  This page is the same content as the site's home page, with every bullet
+  rather than the three shown there. It carries no JavaScript and no styling.
+  <a href="/">Return to the site</a>.
+</p>

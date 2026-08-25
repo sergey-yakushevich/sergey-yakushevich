@@ -1,0 +1,187 @@
+name: Sergey Yakushevich
+initials: SY
+headline: Senior Backend Engineer
+languages: Go, Ruby
+location: Batumi, Georgia
+location_link: https://www.google.com/maps/place/Batumi,+Georgia
+email: sergeyayya@gmail.com
+
+available: true
+availability_label: Remote
+
+social:
+  - name: GitHub
+    url: https://github.com/syakushevich
+    icon: github
+  - name: LinkedIn
+    url: https://linkedin.com/in/sergey-yakushevich-688a4b179/
+    icon: linkedin
+  - name: Portfolio
+    url: https://syakushevich.github.io/portfolio
+    icon: globe
+
+bio:
+  - Hi, I'm Sergey — a backend engineer in Batumi, Georgia.
+  - >-
+    I have spent **10 years on backends**, the last five of them on payment
+    systems. At Moyasar I built fraud blocking and regulatory KYC on a platform
+    that has processed **350M+ payments** across 10+ microservices. Before that
+    I shipped Visa installments and PCI-DSS card tokenization at Mondido, and
+    rebuilt banking integrations at Regate.
+  - >-
+    I take a feature from schema design through to the alert that pages someone
+    when it breaks in production. Most of my career I wrote **Ruby**, and I
+    write **Go** now as well.
+
+stats:
+  - value: 10
+    suffix: ""
+    label: years on backends
+  - value: 350
+    suffix: M+
+    label: payments processed
+  - value: 90
+    suffix: "%"
+    label: faster search, 50M+ users
+
+skill_groups:
+  - label: Languages
+    chips: [Go (Golang), Ruby]
+  - label: Backend
+    chips:
+      - Ruby on Rails
+      - Kafka
+      - REST
+      - GraphQL
+      - Microservices
+      - Event-Driven
+      - Distributed Systems
+      - Concurrency & Queues
+  - label: Database
+    chips: [PostgreSQL, Redis, Elasticsearch]
+  - label: Infra
+    chips: [AWS, Docker, Kubernetes, Terraform, GitHub Actions]
+  - label: Payments
+    wide: true
+    signal: true
+    chips:
+      - PCI-DSS
+      - 3DS
+      - Card Tokenization
+      - Fraud Detection
+      - Identity Verification (KYC)
+      - OAuth2 / JWT
+
+work:
+  - company: Moyasar
+    link: https://moyasar.com
+    title: Senior Ruby on Rails Engineer
+    start: Dec 2025
+    end: Aug 2026
+    badges: [Ruby on Rails, PostgreSQL, Microservices, Kafka, Fraud Detection]
+    description:
+      - >-
+        Built the fraud system that scores and blocks transactions on risk
+        signals, on a platform that has taken 350M+ payments across 10+
+        microservices.
+      - >-
+        Shipped identity verification to the regulator's spec. We needed it to
+        expand into new markets.
+      - >-
+        Wrote the alerting for payment flow disruptions and took time to
+        detection from hours to seconds. We hear it from a monitor now rather
+        than from a merchant.
+    more:
+      - >-
+        Analysed on my own initiative which platform features merchants
+        actually use, and handed management the numbers. Sales now leads with
+        the most adopted features when pitching new clients.
+      - >-
+        Sat in on sales calls as the technical voice when a prospective
+        merchant had integration questions.
+
+  - company: Mondido
+    link: https://mondido.com
+    title: Senior Ruby on Rails Engineer
+    start: Jan 2024
+    end: Jan 2026
+    badges: [Ruby on Rails, React, PostgreSQL, PCI-DSS, Card Tokenization, Visa]
+    description:
+      - >-
+        Delivered the Visa installment integration end to end, backend and
+        checkout UI, which added a payment option merchants had been asking for.
+      - >-
+        Built PCI-DSS compliant card tokenization for gateway calls, so raw card
+        numbers stayed out of our systems.
+      - >-
+        Compared several audit log designs, then built the one that traces every
+        merchant and staff action without adding latency to the request path.
+
+  - company: Regate
+    link: https://regate.com
+    title: Senior Ruby on Rails Engineer
+    start: Nov 2021
+    end: Jan 2024
+    badges: [Kafka, Event-Driven, AWS, Kubernetes, Terraform, Ruby on Rails]
+    description:
+      - >-
+        Automated per-pull-request AWS environments in CI. Reviewers got a
+        running app instead of a screenshot, and release quality went up with it.
+      - >-
+        Owned the integrations with the payment and banking APIs that drive the
+        automated accounting workflows.
+      - >-
+        Started the Service Layer refactor that pulled business logic out of
+        callback-heavy Rails models, which is what made the codebase safe to
+        change again.
+    more:
+      - >-
+        Raised RSpec coverage and added CloudWatch dashboards, so regressions
+        surfaced in CI rather than in production.
+
+  - company: iTransition
+    link: https://itransition.com
+    title: Software Engineer
+    start: Jan 2016
+    end: Jun 2020
+    badges: [Kafka, Elasticsearch, Microservices, GraphQL, AWS ECS, Ruby on Rails]
+    description:
+      - >-
+        Moved the main search workload off MySQL onto Elasticsearch and made it
+        90% faster for 50M+ users.
+      - >-
+        Made the test pipeline 5x faster, which took a full release cycle down
+        from days to hours.
+      - >-
+        Weighed the service communication options and introduced Kafka, which is
+        what let the microservices stop calling each other synchronously.
+
+education:
+  - school: Belarusian State University
+    degree: Bachelor of Science in Computer Science
+    start: "2013"
+    end: "2018"
+
+projects:
+  - title: Moyasar payments platform
+    tech_stack: [Ruby on Rails, PostgreSQL, Kafka, Microservices]
+    link:
+      label: moyasar.com
+      href: https://moyasar.com
+
+  - title: Mondido checkout
+    tech_stack: [Ruby on Rails, React, PCI-DSS, 3DS]
+    link:
+      label: mondido.com
+      href: https://mondido.com
+
+  - title: Regate accounting automation
+    tech_stack: [Ruby on Rails, Kafka, AWS, Terraform]
+    link:
+      label: regate.com
+      href: https://regate.com
+
+  - title: A public Go service
+    tech_stack: [Go (Golang), PostgreSQL]
+    placeholder: true
+    link: null
