@@ -2,7 +2,7 @@ require "test_helper"
 
 class PagesTest < ActionDispatch::IntegrationTest
   test "every route responds" do
-    [ root_path, "/projects", writing_path, "/agents" ].each do |path|
+    [ root_path, "/projects", blog_path, "/agents" ].each do |path|
       get path
       assert_response :success, "#{path} did not respond with 200"
     end
@@ -55,8 +55,16 @@ class PagesTest < ActionDispatch::IntegrationTest
   end
 
   test "an unknown post slug redirects to the index instead of erroring" do
-    get "/writing/no-such-post"
-    assert_redirected_to writing_path
+    get "/blog/no-such-post"
+    assert_redirected_to blog_path
+  end
+
+  test "the old writing paths redirect to blog" do
+    get "/writing"
+    assert_redirected_to "/blog"
+
+    get "/writing/search-off-mysql"
+    assert_redirected_to "/blog/search-off-mysql"
   end
 
   private

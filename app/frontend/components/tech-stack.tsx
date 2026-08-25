@@ -1,22 +1,18 @@
 import { Chip } from "@/components/chip"
 import { useResume } from "@/lib/resume"
-import { cn } from "@/lib/utils"
 
 export function TechStack() {
   const RESUME = useResume()
 
   return (
-    <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="gap-4 sm:columns-2 lg:columns-3 [&>*]:mb-4 [&>*]:break-inside-avoid">
       {RESUME.skillGroups.map((group) => (
         <div
           key={group.label}
-          className={cn(
-            "rounded-lg border border-border bg-card p-6",
-            group.wide && "sm:col-span-2",
-          )}
+          className="rounded-lg border border-border bg-card p-5"
         >
           <p className="label-mono">{group.label}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {group.chips.map((chip) => (
               <Chip key={chip} signal={group.signal}>
                 {chip}

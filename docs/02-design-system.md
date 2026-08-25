@@ -169,20 +169,24 @@ longer than three words.
 
 | Property | Value |
 |---|---|
-| Container | `max-w-[700px]`, centred |
+| Container | `max-w-[910px]`, centred |
 | Page padding | `px-6 py-10` |
 | Gap between sections | `gap-16` (64px) |
 | Gap inside a section | `space-y-5` (20px) |
 | Card padding | `p-6` |
 | Radius | `10px` (`--radius`) — one value everywhere |
 
-700px is narrow on purpose. It forces one idea per row and makes the page read
-like a document rather than a dashboard.
+910px. The first build used the reference site's 700px, which was too tight
+once the chips were in — the tech-stack columns were narrow enough that an
+eight-chip group stacked almost one per line. Still narrow enough to read as a
+document rather than a dashboard.
 
 ### Grid
 
-- Tech stack: 3 columns ≥1024px, 2 columns ≥640px, 1 column below, `items-start`.
-  `PAYMENTS` spans 2 columns. See §5.
+- Tech stack: CSS **columns**, not a grid — 3 at ≥1024px, 2 at ≥640px, 1 below,
+  with `break-inside-avoid` on each card. A grid aligns rows, so a two-chip
+  `LANGUAGES` card left a hole beside the eight-chip `BACKEND` card no matter
+  how the heights were handled. Columns pack the cards tightly instead.
 - Everything else: single column at every width.
 
 ### Elevation
@@ -204,20 +208,24 @@ not on this list does not get installed.
 
 | Component | Where it is used |
 |---|---|
-| `button` | Installed; kept for future use |
-| `badge` | Installed; the `Chip` primitive covers the tech-chip case |
+| `badge` | Every tech chip, via the `Chip` wrapper (`variant="outline"`) |
 | `card` | Article preview (via card-01) |
 | `avatar` | Profile photo, with initials `SY` as fallback |
 | `separator` | Divider inside the profile card |
 | `tooltip` | Social icon labels |
-| `tabs` | Tag filter on `/writing`, driven by tabs-08 |
+| `tabs` | The top navigation, with `asChild` Inertia links |
 
 ### From shadcnspace
 
 | Item | Where | What was changed |
 |---|---|---|
-| `@shadcn-space/card-01` | Article preview on `/writing` and the home page | Rewritten to take props. The demo's stock photo, lorem body and four-co-author avatar stack are gone — a "+4" bubble on a solo blog is a lie told by a placeholder. Cover image is optional. Staggered entrance kept. |
-| `@shadcn-space/tabs-08` | Tag filter on `/writing` | Demo dashboard panels and the default export removed. Indicator shadow dropped and radius pinned to the token. Spring `layoutId` indicator and direction-aware panel transitions kept. |
+| `@shadcn-space/card-01` | Article preview on `/blog` and the home page | Rewritten to take props. The demo's stock photo, lorem body and four-co-author avatar stack are gone — a "+4" bubble on a solo blog is a lie told by a placeholder. Cover image is optional. Staggered entrance kept. |
+| `@shadcn-space/badge-03` | Every tech chip | The registry item is a one-line demo of `<Badge variant="outline">`, so the variant is used directly through the `Chip` wrapper rather than keeping a demo file. |
+
+`@shadcn-space/tabs-08` was installed for the tag filter on the blog index. That
+filter is gone, and the navigation uses the shadcn `tabs` primitive directly, so
+tabs-08 no longer had an importer and was removed. `pnpm dlx shadcn@latest add
+@shadcn-space/tabs-08` brings it back.
 
 Built in-house rather than installed, because each is a handful of lines against
 the token set and an installed variant would have to be stripped back to it
@@ -237,10 +245,12 @@ live in `app/frontend/components/brand-icons.tsx` as inline SVG.
 
 ### Pill navigation
 
-Centred at the top of the page, above the profile card.
+Centred at the top of the page, above the profile card. Built on the shadcn
+`Tabs` primitive with `asChild` Inertia links, so the markup is a tab list and
+the behaviour is navigation.
 
 - Container: `--secondary` fill, `--border` 1px, fully rounded, `p-1`.
-- Items: `Home` · `Projects` · `Writing`.
+- Items: `Home` · `Projects` · `Blog`.
 - Active item: `--card` fill, `--foreground` text, radius 10px inside the pill.
 - Inactive item: `--muted-foreground`, moves to `--foreground` on hover.
 - The active pill slides between items on route change, 200ms, `ease-out`.
@@ -265,9 +275,14 @@ Two columns. Left: avatar plus identity. Right: social icon row.
 
 ### Tech chip
 
-- `--secondary` fill, `--border` 1px, radius 10px, `px-3 py-1.5`, `text-sm`.
-- Optional 16px technology icon on the left.
-- Payments-domain chips add a 1px `--signal-shipped` left border. Nothing else.
+shadcn `Badge` with `variant="outline"`: transparent fill, 1px `--border`, fully
+rounded, `--muted-foreground` text at `font-normal`.
+
+- `md` (tech stack): `px-2.5 py-0.5`, `text-xs`.
+- `sm` (job badges, post tags): `px-2 py-0`, `text-[11px]`.
+- Payments-domain chips take a `--signal-shipped` border and `--foreground`
+  text. A left-edge-only border was tried first and looked like a rendering
+  artifact on a pill — a full outline reads as deliberate.
 - Chips do not link anywhere and are not interactive. No hover state.
 
 ### Theme toggle
@@ -348,7 +363,7 @@ message.
 | Tab change | Spring indicator, plus a direction-aware panel slide |
 | Article card mounts | 24px rise, cascaded 60ms per list position, then staggered children at 120ms |
 | Hover on any control | Colour only, 150ms |
-| Number ticker | Count up over 900ms on `ease-calm` when it first scrolls in |
+| Number ticker | Count up over 900ms on `ease-calm`, on mount |
 | Theme switch | 900ms `clip-path` wave on `ease-calm`, from the click point |
 | "Show more" on a job | Height auto, 250ms, `ease-soft` |
 

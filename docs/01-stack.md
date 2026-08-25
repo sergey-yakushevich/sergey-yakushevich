@@ -242,11 +242,12 @@ Nothing is typed twice.
 |---|---|---|
 | `/` | `PagesController#home` | Profile, tech stack, experience, recent posts |
 | `/projects` | `PagesController#projects` | Project list |
-| `/writing` | `PostsController#index` | Post list |
-| `/writing/:slug` | `PostsController#show` | Single post |
+| `/blog` | `PostsController#index` | Post list |
+| `/blog/:slug` | `PostsController#show` | Single post |
+| `/writing`, `/writing/:slug` | redirect | 301 to the `/blog` equivalents |
 | `/agents` | `PagesController#agents` | Plain text for automated readers |
 
-An unknown slug redirects to `/writing` with a 301 rather than raising, so a
+An unknown slug redirects to `/blog` with a 301 rather than raising, so a
 stale link from elsewhere lands somewhere useful instead of on an error page.
 
 Posts are markdown files with YAML front matter, parsed at boot and cached. No

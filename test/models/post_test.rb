@@ -14,7 +14,7 @@ class PostTest < ActiveSupport::TestCase
     assert_predicate post.title, :present?
     assert_predicate post.summary, :present?
     assert_no_match(/\A\d{4}-\d{2}-\d{2}-/, post.slug)
-    assert_equal "/writing/#{post.slug}", post.url
+    assert_equal "/blog/#{post.slug}", post.url
   end
 
   test "the body renders to HTML with syntax highlighting classes" do

@@ -40,7 +40,7 @@ Experience
   Regate         ·  NOV 2021 — JAN 2024
   iTransition    ·  JAN 2016 — JUN 2020
 
-Writing
+Blog
   three most recent posts
 
 Footer
@@ -152,7 +152,7 @@ answer the Go-experience filter at the same time.
 
 ---
 
-## Writing
+## Blog
 
 Markdown files in `content/posts/`, with front matter:
 
@@ -170,7 +170,9 @@ status: published   # or draft
 marker in the list.
 
 The list page shows title, date and reading time in the mono label style,
-summary, and tags. No excerpt beyond the summary line, no view counter.
+summary, and tags. No excerpt beyond the summary line, no view counter, and no
+tag filter — one post does not need filtering, and the control was louder than
+the list it filtered.
 
 ---
 

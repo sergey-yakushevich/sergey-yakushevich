@@ -1,12 +1,13 @@
 import { Link, usePage } from "@inertiajs/react"
 import { motion } from "motion/react"
 
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 
 const ITEMS = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
-  { label: "Writing", href: "/writing" },
+  { label: "Blog", href: "/blog" },
 ]
 
 export function PillNav() {
@@ -18,34 +19,36 @@ export function PillNav() {
       ?.href ?? "/"
 
   return (
-    <nav className="flex justify-center">
-      <div className="inline-flex items-center gap-1 rounded-full border border-border bg-secondary p-1">
+    <Tabs value={activeHref} className="w-fit">
+      <TabsList className="h-auto! w-fit gap-1 rounded-full border border-border bg-secondary p-1">
         {ITEMS.map((item) => {
           const isActive = item.href === activeHref
           return (
-            <Link
+            <TabsTrigger
               key={item.href}
-              href={item.href}
-              aria-current={isActive ? "page" : undefined}
+              value={item.href}
+              asChild
               className={cn(
-                "relative rounded-full px-4 py-1.5 text-sm transition-colors",
+                "relative z-0 h-8 flex-none rounded-full border-none bg-transparent px-4 text-sm font-medium shadow-none transition-colors after:hidden data-[state=active]:bg-transparent data-[state=active]:shadow-none",
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground",
               )}
             >
-              {isActive && (
-                <motion.span
-                  layoutId="pill-nav-active"
-                  className="absolute inset-0 -z-10 rounded-full bg-card ring-1 ring-border"
-                  transition={{ type: "spring", stiffness: 420, damping: 34 }}
-                />
-              )}
-              {item.label}
-            </Link>
+              <Link href={item.href} aria-current={isActive ? "page" : undefined}>
+                {isActive && (
+                  <motion.span
+                    layoutId="pill-nav-active"
+                    className="absolute inset-0 -z-10 rounded-full bg-card ring-1 ring-border"
+                    transition={{ type: "spring", stiffness: 420, damping: 34 }}
+                  />
+                )}
+                {item.label}
+              </Link>
+            </TabsTrigger>
           )
         })}
-      </div>
-    </nav>
+      </TabsList>
+    </Tabs>
   )
 }

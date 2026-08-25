@@ -1,16 +1,12 @@
-import { useEffect, useRef, useState } from "react"
-import { animate, useInView } from "motion/react"
+import { useEffect, useState } from "react"
+import { animate } from "motion/react"
 
 import { useResume } from "@/lib/resume"
 
 function Ticker({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref, { once: true, margin: "-40px" })
   const [display, setDisplay] = useState(0)
 
   useEffect(() => {
-    if (!inView) return
-
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches
@@ -24,13 +20,14 @@ function Ticker({ value, suffix }: { value: number; suffix: string }) {
       duration: 0.9,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (latest) => setDisplay(Math.round(latest)),
+      onComplete: () => setDisplay(value),
     })
 
     return () => controls.stop()
-  }, [inView, value])
+  }, [value])
 
   return (
-    <span ref={ref} className="tabular-nums">
+    <span className="tabular-nums">
       {display}
       {suffix}
     </span>

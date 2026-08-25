@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 
+import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
 
 export function Chip({
@@ -14,15 +15,16 @@ export function Chip({
   className?: string
 }) {
   return (
-    <span
+    <Badge
+      variant="outline"
       className={cn(
-        "inline-flex items-center whitespace-nowrap rounded-lg border border-border bg-secondary text-secondary-foreground",
-        size === "sm" ? "px-2 py-0.5 text-xs" : "px-3 py-1.5 text-sm",
-        signal && "border-l-2 border-l-signal-shipped",
+        "font-normal text-muted-foreground",
+        size === "sm" ? "px-2 py-0 text-[11px]" : "px-2.5 py-0.5 text-xs",
+        signal && "border-signal-shipped/70 text-foreground",
         className,
       )}
     >
       {children}
-    </span>
+    </Badge>
   )
 }

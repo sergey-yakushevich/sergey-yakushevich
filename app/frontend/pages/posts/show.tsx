@@ -18,7 +18,7 @@ export default function PostShow({ post }: { post: PostDetail }) {
 
       <article className="pt-2">
         <Link
-          href="/writing"
+          href="/blog"
           className="inline-flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="size-3.5" aria-hidden="true" />

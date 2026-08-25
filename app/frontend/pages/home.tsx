@@ -47,11 +47,11 @@ export default function Home({ avatarUrl, posts }: HomeProps) {
 
       {posts.length > 0 && (
         <Section
-          title="Writing"
+          title="Blog"
           subtitle="Notes on backends, payments and Go"
           action={
             <Link
-              href="/writing"
+              href="/blog"
               className="inline-flex shrink-0 items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               All posts

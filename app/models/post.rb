@@ -74,7 +74,7 @@ class Post
   end
 
   def url
-    "/writing/#{slug}"
+    "/blog/#{slug}"
   end
 
   def date_label

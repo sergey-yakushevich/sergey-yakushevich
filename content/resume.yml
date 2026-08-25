@@ -16,9 +16,6 @@ social:
   - name: LinkedIn
     url: https://linkedin.com/in/sergey-yakushevich-688a4b179/
     icon: linkedin
-  - name: Portfolio
-    url: https://sergey-yakushevich.github.io/portfolio
-    icon: globe
 
 bio:
   - Hi, I'm Sergey — a backend engineer in Batumi, Georgia.
@@ -62,7 +59,6 @@ skill_groups:
   - label: Infra
     chips: [AWS, Docker, Kubernetes, Terraform, GitHub Actions]
   - label: Payments
-    wide: true
     signal: true
     chips:
       - PCI-DSS

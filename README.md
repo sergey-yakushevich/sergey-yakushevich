@@ -52,8 +52,8 @@ bundle exec kamal rollback <version>
 |---|---|
 | `/` | Profile, tech stack, stats, experience, recent posts |
 | `/projects` | Project list — title, link and tech stack |
-| `/writing` | Post list with a tag filter |
-| `/writing/:slug` | A post |
+| `/blog` | Post list |
+| `/blog/:slug` | A post |
 | `/agents` | The same CV as plain HTML — no CSS, no JavaScript |
 
 ## Where things live
@@ -97,8 +97,7 @@ database rows anywhere in the app.
    - No public personal Go project. The projects grid already renders a fourth,
      dashed "open slot" card so the gap stays visible instead of forgotten.
    - Two `TODO: metric` markers on the Mondido and Regate lead bullets.
-2. **Write posts two and three.** One post makes the `/writing` tab bar filter a
-   list of one.
+2. **Write posts two and three.**
 
 Content rule, enforced across the site: nothing here claims more than the CV
 claims. When Go lands in the Moyasar work history, the site follows — not before.
