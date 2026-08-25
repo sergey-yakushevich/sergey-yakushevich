@@ -40,6 +40,7 @@ is a separate site that reads the same source data. See §6.
 | Content | Markdown + front matter | Posts are files in git, not database rows |
 | CV data | YAML, read by Rails | One copy, three readers — see §6 |
 | Deploy | Kamal 2 on a VPS | Ships with Rails 8; also on-message for the CV |
+| Registry | GHCR | Matches the six apps already on the same server |
 
 Deliberately absent: no Redis, no background jobs, no CMS, no auth. A portfolio
 that needs a queue has been over-built.
@@ -301,10 +302,28 @@ the projects grid takes a fourth card without any layout change.
 6. ~~Projects page.~~ Done.
 7. ~~Markdown pipeline and the writing pages.~~ Done.
 8. ~~`/agents` plain-text page.~~ Done.
-9. Kamal deploy to `cyberjosef.dev`. **Not done.**
+9. ~~Kamal deploy to `cyberjosef.dev`.~~ Done. Live on both the apex and `www`,
+   Let's Encrypt certificates, HTTP redirecting to HTTPS.
 
-Remaining before launch, in order of what a visitor notices:
+Remaining, in order of what a visitor notices:
 
 1. Close the content gaps listed in the README.
 2. Write the second and third posts. One post makes a `/writing` tab bar that
    filters a list of one.
+
+### Deploy notes
+
+The VPS already ran kamal-proxy on 80/443 for six other apps, so this app joined
+that proxy rather than introducing a second one. Three things that bit during
+the first deploy and are worth remembering:
+
+- **The generated Dockerfile had no Node stage.** `rails new --skip-javascript`
+  omits it, but `assets:precompile` runs `vite build`. The build stage now
+  installs Node 22 and enables corepack, and `package.json` pins
+  `packageManager` so the image uses the same pnpm as local.
+- **Kamal needs key-based SSH.** Password auth makes it fail with a bare
+  `Errno::ENODEV`. A dedicated `cyberjosef_deploy` key is declared under `ssh:`
+  in `config/deploy.yml`.
+- **`write:packages` is required to push to GHCR.** A `repo`-scoped token logs
+  in successfully and then fails the push with `permission_denied`, which reads
+  like a registry problem rather than a scope problem.

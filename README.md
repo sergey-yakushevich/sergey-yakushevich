@@ -2,6 +2,8 @@
 
 Blog and portfolio for Sergey Yakushevich — Senior Backend Engineer (Go, Ruby).
 
+**Live: https://cyberjosef.dev**
+
 Rails 8 · Inertia · React 19 + TypeScript · Vite · Tailwind CSS v4 · shadcn/ui ·
 markdown posts in git · Kamal 2.
 
@@ -19,6 +21,29 @@ bin/rails test               # 13 tests
 bundle exec rubocop          # clean
 pnpm run check               # tsc, clean
 bundle exec vite build       # production assets
+```
+
+## Deploy
+
+Kamal 2 to a VPS, image on GHCR, TLS from Let's Encrypt via kamal-proxy.
+
+```bash
+set -a && . ./.env && set +a                      # SECRET_KEY_BASE
+export KAMAL_REGISTRY_PASSWORD="$(gh auth token)" # needs write:packages
+bundle exec kamal deploy
+```
+
+`.env` is gitignored and holds `SECRET_KEY_BASE`. The GHCR token needs the
+`write:packages` scope — a plain `repo`-scoped `gh` token can log in to ghcr.io
+but silently fails on push. SSH uses a dedicated key, `~/.ssh/cyberjosef_deploy`,
+matching the per-app key convention already on the server.
+
+Useful:
+
+```bash
+bundle exec kamal logs -f
+bundle exec kamal app exec --interactive --reuse "bin/rails console"
+bundle exec kamal rollback <version>
 ```
 
 ## Pages
