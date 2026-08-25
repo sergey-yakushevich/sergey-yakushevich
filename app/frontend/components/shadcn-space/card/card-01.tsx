@@ -64,7 +64,7 @@ export function ArticlePreviewCard({
                 src={coverImage}
                 alt=""
                 loading="lazy"
-                className="aspect-[16/9] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                className="aspect-[16/9] w-full bg-black object-cover transition-transform duration-500 group-hover:scale-[1.02]"
               />
             </motion.div>
           )}

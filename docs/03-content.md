@@ -179,6 +179,12 @@ status: published   # or draft
 `draft` posts render in development only, and carry the `--signal-attention`
 marker in the list.
 
+`cover_image` is optional and letterboxed onto black at 16:9. The first post
+uses a still from the animation on the old portfolio's "Let's work together"
+page. The source is a 150-frame, 15 MB GIF; an animated WebP of it still weighs
+832 KB even at 8fps, which is several times the rest of the page put together,
+so the card carries a single 60 KB frame instead.
+
 The list page shows title, date and reading time in the mono label style,
 summary, and tags. No excerpt beyond the summary line, no view counter, and no
 tag filter — one post does not need filtering, and the control was louder than

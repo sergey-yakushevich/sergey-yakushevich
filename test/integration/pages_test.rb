@@ -70,6 +70,17 @@ class PagesTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "every post cover image is actually on disk" do
+    get blog_path
+
+    inertia_props["posts"].each do |post|
+      next if post["coverImage"].nil?
+
+      path = Rails.public_path.join(post["coverImage"].delete_prefix("/"))
+      assert_predicate path, :exist?, "missing #{post["coverImage"]}"
+    end
+  end
+
   test "an unknown post slug redirects to the index instead of erroring" do
     get "/blog/no-such-post"
     assert_redirected_to blog_path

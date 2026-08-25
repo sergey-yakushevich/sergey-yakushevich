@@ -206,6 +206,8 @@
 .dark .page-backdrop-image {
   background-image: url('/images/bg-dark.jpg');
   aspect-ratio: 1800 / 1296;
+  opacity: 1;
+  filter: brightness(0.7);
 }
 
 .dark .page-backdrop-grid {

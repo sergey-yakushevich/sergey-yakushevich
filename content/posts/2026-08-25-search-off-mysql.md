@@ -3,6 +3,7 @@ title: "Moving search off MySQL, and what it actually cost"
 summary: "A LIKE query against 50M rows is not a search engine. Here is what replacing it looked like, including the part nobody writes down."
 date: 2026-08-25
 tags: [elasticsearch, performance, postgres]
+cover_image: /images/posts/search-off-mysql.jpg
 status: published
 ---
 

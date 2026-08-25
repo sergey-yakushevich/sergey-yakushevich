@@ -178,8 +178,11 @@ document rather than a dashboard.
 Two layers, both lifted from the portfolio, both `position: fixed` and
 `pointer-events: none` so they never intercept a click:
 
-1. **The aurora**, at 70% opacity. `background.jpg` in light,
-   `background-dark.jpg` in dark —
+1. **The aurora**, dimmed 30% — but by a different mechanism per theme, because
+   "dimmer" means opposite things on opposite substrates. Dark uses
+   `brightness(0.7)`, a true dim toward black. Light uses `opacity: 0.7`;
+   a brightness filter there drags the near-white paper to grey and the whole
+   page reads dirty. `background.jpg` in light, `background-dark.jpg` in dark —
    the repo ships both, and the dark one is the photo-negative of the light one.
    Anchored top-centre at `100% auto`, so it bleeds off the bottom rather than
    squashing.
@@ -277,15 +280,16 @@ Two columns. Left: avatar plus identity. Right: social icon row.
 
 ### Tech chip
 
-shadcn `Badge`, **inverted against the theme**: `bg-foreground` with
-`text-background`. Dark theme gives a near-white pill with near-black text;
-light theme gives the exact opposite. Fully rounded, no border.
+shadcn `Badge` with `variant="outline"`: transparent fill, 1px `--border`, fully
+rounded, `--muted-foreground` text at `font-normal`.
 
 - `md` (tech stack): `px-2.5 py-0.5`, `text-xs`.
 - `sm` (job badges, post tags, project cards): `px-2 py-0`, `text-[11px]`.
-- Every chip is identical. The payments group used to carry a colour marker;
-  once chips became theme-inverted they were already the loudest thing on the
-  page, and a second emphasis on top of maximum contrast reads as noise.
+- Every chip is identical — no group carries a colour or weight marker.
+- The **inverted** treatment (`bg-foreground` / `text-background`) is reserved
+  for exactly one element: the category badge on a project card. It is the only
+  badge on the site that names a kind rather than a technology, and being the
+  sole inverted thing is what makes it read as a label rather than another chip.
 - Chips do not link anywhere and are not interactive. No hover state.
 
 ### Profile card CTA
