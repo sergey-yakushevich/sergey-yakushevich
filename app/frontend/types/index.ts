@@ -13,7 +13,6 @@ export type Stat = {
 export type SkillGroup = {
   label: string
   chips: string[]
-  signal?: boolean
 }
 
 export type WorkEntry = {

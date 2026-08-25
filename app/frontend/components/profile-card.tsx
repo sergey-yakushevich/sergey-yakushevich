@@ -1,6 +1,7 @@
-import { Globe, Mail, MapPin } from "lucide-react"
+import { ArrowRight, Globe, Mail, MapPin } from "lucide-react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import {
   Tooltip,
@@ -110,6 +111,21 @@ export function ProfileCard({ avatarUrl }: { avatarUrl?: string | null }) {
             <Emphasis text={paragraph} />
           </p>
         ))}
+      </div>
+
+      <Separator className="my-6" />
+
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
+        <p className="text-sm text-muted-foreground">
+          An agent or a recruiter&apos;s parser reading this? There is a
+          plain-text version with every detail.
+        </p>
+        <Button asChild className="shrink-0">
+          <a href="/agents">
+            Open the plain-text page
+            <ArrowRight className="size-4" aria-hidden="true" />
+          </a>
+        </Button>
       </div>
     </section>
   )

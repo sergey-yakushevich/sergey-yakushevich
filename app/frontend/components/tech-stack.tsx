@@ -14,9 +14,7 @@ export function TechStack() {
           <p className="label-mono">{group.label}</p>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {group.chips.map((chip) => (
-              <Chip key={chip} signal={group.signal}>
-                {chip}
-              </Chip>
+              <Chip key={chip}>{chip}</Chip>
             ))}
           </div>
         </div>

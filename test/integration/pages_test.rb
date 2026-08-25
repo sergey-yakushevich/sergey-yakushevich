@@ -17,12 +17,15 @@ class PagesTest < ActionDispatch::IntegrationTest
     assert_includes props.dig("resume", "skillGroups").map { |g| g["label"] }, "Payments"
   end
 
-  test "the payments group is the only one carrying the signal marker" do
+  test "every skill group has a label and chips" do
     get root_path
     groups = inertia_props.dig("resume", "skillGroups")
 
-    signalled = groups.select { |group| group["signal"] }
-    assert_equal [ "Payments" ], signalled.map { |group| group["label"] }
+    assert_predicate groups, :any?
+    groups.each do |group|
+      assert_predicate group["label"], :present?
+      assert_predicate group["chips"], :any?
+    end
   end
 
   test "every project is complete enough to render a card" do

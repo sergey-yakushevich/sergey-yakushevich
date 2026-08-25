@@ -59,7 +59,6 @@ skill_groups:
   - label: Infra
     chips: [AWS, Docker, Kubernetes, Terraform, GitHub Actions]
   - label: Payments
-    signal: true
     chips:
       - PCI-DSS
       - 3DS

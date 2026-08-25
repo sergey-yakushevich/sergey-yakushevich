@@ -119,7 +119,7 @@ pixel values rather than Tailwind steps:
 | Utility | Value | Applied to |
 |---|---|---|
 | `display-1` | 50px / 50px, weight 700 | The name in the profile card |
-| `display-2` | 40px, weight 900 | Every section heading (`h2`) |
+| `display-2` | 40px, weight 600 | Every section heading (`h2`) |
 | `nav-text` | 18px, weight 700 | The navigation items |
 | body | 20px / 1.5 | Set on `body`; everything inherits it |
 | `label-mono` | 12px, weight 700, uppercase, `+0.06em` | Group labels, dates |
@@ -178,7 +178,8 @@ document rather than a dashboard.
 Two layers, both lifted from the portfolio, both `position: fixed` and
 `pointer-events: none` so they never intercept a click:
 
-1. **The aurora.** `background.jpg` in light, `background-dark.jpg` in dark —
+1. **The aurora**, at 70% opacity. `background.jpg` in light,
+   `background-dark.jpg` in dark —
    the repo ships both, and the dark one is the photo-negative of the light one.
    Anchored top-centre at `100% auto`, so it bleeds off the bottom rather than
    squashing.
@@ -282,10 +283,21 @@ light theme gives the exact opposite. Fully rounded, no border.
 
 - `md` (tech stack): `px-2.5 py-0.5`, `text-xs`.
 - `sm` (job badges, post tags, project cards): `px-2 py-0`, `text-[11px]`.
-- Payments-domain chips fill with `--signal-shipped` instead. The inversion
-  already makes chips high-contrast, so an outline marker would have been
-  invisible — the marker has to be a fill now.
+- Every chip is identical. The payments group used to carry a colour marker;
+  once chips became theme-inverted they were already the loudest thing on the
+  page, and a second emphasis on top of maximum contrast reads as noise.
 - Chips do not link anywhere and are not interactive. No hover state.
+
+### Profile card CTA
+
+The "agent reading this?" prompt lives inside the profile card, below the bio
+and behind a `Separator`, rather than in a card of its own. Two bordered panels
+stacked with a gap read as two unrelated things; one card with a rule reads as
+a footnote to the bio, which is what it is.
+
+The control is the plain shadcn `Button` in its default variant. That variant is
+already theme-inverted — `bg-primary` resolves to near-white on dark and
+near-black on light — so it matches the chips without any custom classes.
 
 ### Theme toggle
 
@@ -341,18 +353,6 @@ like a chip; the `flex-wrap` parent moves it to the next row instead.
 - Bullets: `text-sm`, `leading-relaxed`, at most three shown. A "Show more"
   toggle reveals the rest. The CV file has up to six bullets per job and all six
   on screen at once turns the page into a wall.
-
-### CTA strip
-
-The "AI agent reading this portfolio?" panel from the screenshot. Keep it — the
-CV data already targets automated screening, so a machine-readable page is on
-message.
-
-- `--card` fill, `--border` 1px, `p-6`, single row, space-between.
-- Left: question in `text-sm`.
-- Right: outline button whose border is `--signal-shipped`.
-- Links to `/agents`, a plain-text page carrying the same content, plus the
-  GraphQL endpoint the CV project already exposes.
 
 ---
 

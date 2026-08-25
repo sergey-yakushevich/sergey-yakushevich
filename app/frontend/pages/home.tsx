@@ -1,7 +1,6 @@
 import { Head, Link } from "@inertiajs/react"
 import { ArrowRight } from "lucide-react"
 
-import { CtaStrip } from "@/components/cta-strip"
 import { ExperienceList } from "@/components/experience-list"
 import { ProfileCard } from "@/components/profile-card"
 import { Section } from "@/components/section"
@@ -30,8 +29,6 @@ export default function Home({ avatarUrl, posts }: HomeProps) {
       </Head>
 
       <ProfileCard avatarUrl={avatarUrl} />
-
-      <CtaStrip />
 
       <Section title="Tech Stack" subtitle="Technologies I work with">
         <TechStack />
