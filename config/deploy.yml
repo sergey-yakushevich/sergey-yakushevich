@@ -7,7 +7,9 @@ servers:
 
 proxy:
   ssl: true
-  host: cyberjosef.dev
+  hosts:
+    - cyberjosef.dev
+    - www.cyberjosef.dev
   app_port: 80
 
 registry:
@@ -33,5 +35,9 @@ volumes:
 
 builder:
   arch: amd64
+
+ssh:
+  keys:
+    - ~/.ssh/cyberjosef_deploy
 
 asset_path: /rails/public/vite
