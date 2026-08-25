@@ -14,9 +14,9 @@ export function Chip({
 }) {
   return (
     <Badge
-      variant="outline"
+      variant="secondary"
       className={cn(
-        "font-normal text-muted-foreground",
+        "border-transparent font-medium",
         size === "sm" ? "px-2 py-0 text-[11px]" : "px-2.5 py-0.5 text-xs",
         className,
       )}

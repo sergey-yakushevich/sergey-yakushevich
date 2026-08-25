@@ -4,12 +4,6 @@ export type SocialLink = {
   icon: "github" | "linkedin" | "globe" | "mail"
 }
 
-export type Stat = {
-  value: number
-  suffix: string
-  label: string
-}
-
 export type SkillGroup = {
   label: string
   chips: string[]
@@ -55,7 +49,6 @@ export type Resume = {
   availabilityLabel: string
   social: SocialLink[]
   bio: string[]
-  stats: Stat[]
   skillGroups: SkillGroup[]
   work: WorkEntry[]
   education: Education[]

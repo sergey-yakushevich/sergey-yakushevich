@@ -299,7 +299,7 @@ the projects grid takes a fourth card without any layout change.
 2. ~~Token file and the two fonts.~~ Done — self-hosted Inter and JetBrains Mono.
 3. ~~`site-layout.tsx`: pill nav, 700px container, footer.~~ Done.
 4. ~~`content/resume.yml` populated from the CV data file.~~ Done.
-5. ~~Home page: profile card → CTA strip → tech stack → stats → experience.~~ Done.
+5. ~~Home page: profile card → tech stack → experience → recent posts.~~ Done.
 6. ~~Projects page.~~ Done.
 7. ~~Markdown pipeline and the writing pages.~~ Done.
 8. ~~`/agents` plain-text page.~~ Done.

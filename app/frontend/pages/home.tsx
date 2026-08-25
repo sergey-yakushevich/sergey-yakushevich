@@ -4,7 +4,6 @@ import { ArrowRight } from "lucide-react"
 import { ExperienceList } from "@/components/experience-list"
 import { ProfileCard } from "@/components/profile-card"
 import { Section } from "@/components/section"
-import { StatRow } from "@/components/stat-row"
 import { TechStack } from "@/components/tech-stack"
 import { ArticlePreviewCard } from "@/components/shadcn-space/card/card-01"
 import SiteLayout from "@/layouts/site-layout"
@@ -32,10 +31,6 @@ export default function Home({ avatarUrl, posts }: HomeProps) {
 
       <Section title="Tech Stack" subtitle="Technologies I work with">
         <TechStack />
-      </Section>
-
-      <Section title="By the numbers" subtitle="Each one is in a bullet below">
-        <StatRow />
       </Section>
 
       <Section title="Experience" subtitle="Ten years, four companies">

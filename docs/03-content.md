@@ -79,22 +79,6 @@ value to change rather than a paragraph to rewrite.
 
 ---
 
-## Stat row
-
-A count-up on first view. Three numbers, all already evidenced in the CV
-bullets:
-
-| Value | Label |
-|---|---|
-| 10 | years on backends |
-| 350M+ | payments processed |
-| 90% | faster search for 50M+ users |
-
-Only use numbers that appear in a work bullet on the same page. A statistic
-without an adjacent claim reads as decoration.
-
----
-
 ## Experience entries
 
 Taken from the CV `work` array with no rewriting. Employer-assigned job titles
@@ -179,11 +163,8 @@ status: published   # or draft
 `draft` posts render in development only, and carry the `--signal-attention`
 marker in the list.
 
-`cover_image` is optional and letterboxed onto black at 16:9. The first post
-uses a still from the animation on the old portfolio's "Let's work together"
-page. The source is a 150-frame, 15 MB GIF; an animated WebP of it still weighs
-832 KB even at 8fps, which is several times the rest of the page put together,
-so the card carries a single 60 KB frame instead.
+`cover_image` is optional and rendered at 16:9. The first post uses the artwork
+from the old portfolio's home page, cropped to keep the figures centred.
 
 The list page shows title, date and reading time in the mono label style,
 summary, and tags. No excerpt beyond the summary line, no view counter, and no

@@ -30,17 +30,6 @@ bio:
     when it breaks in production. Most of my career I wrote **Ruby**, and I
     write **Go** now as well.
 
-stats:
-  - value: 10
-    suffix: ""
-    label: years on backends
-  - value: 350
-    suffix: M+
-    label: payments processed
-  - value: 90
-    suffix: "%"
-    label: faster search, 50M+ users
-
 skill_groups:
   - label: Languages
     chips: [Go (Golang), Ruby]

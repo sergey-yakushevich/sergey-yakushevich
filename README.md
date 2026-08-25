@@ -50,7 +50,7 @@ bundle exec kamal rollback <version>
 
 | Path | What it is |
 |---|---|
-| `/` | Profile, tech stack, stats, experience, recent posts |
+| `/` | Profile, tech stack, experience, recent posts |
 | `/projects` | Three shipped products, two per row |
 | `/blog` | Post list |
 | `/blog/:slug` | A post |
@@ -64,6 +64,7 @@ bundle exec kamal rollback <version>
 | Posts | `content/posts/*.md`, YAML front matter, parsed by `app/models/post.rb` |
 | Design tokens | `app/frontend/entrypoints/application.css` |
 | Project screenshots | `public/images/projects/*.jpg` — retake when a site changes |
+| Post covers | `public/images/posts/*.jpg`, set via `cover_image` in front matter |
 | Page shell | `app/frontend/layouts/site-layout.tsx` |
 | Theme wave | `app/frontend/lib/theme.tsx` + the `::view-transition` block in the CSS |
 

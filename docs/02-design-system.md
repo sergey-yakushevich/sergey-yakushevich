@@ -280,8 +280,18 @@ Two columns. Left: avatar plus identity. Right: social icon row.
 
 ### Tech chip
 
-shadcn `Badge` with `variant="outline"`: transparent fill, 1px `--border`, fully
-rounded, `--muted-foreground` text at `font-normal`.
+shadcn `Badge` with `variant="secondary"`: `--secondary` fill, no border, fully
+rounded. That token is `#f5f5f5` in light and `#171717` in dark, which is the
+grey-on-light / black-on-dark pairing the design calls for, with the text colour
+following automatically.
+
+`shadcn.io/r/badge.json` was evaluated for this and rejected. Its variants are
+bare class names (`cn-badge-variant-default`) whose rules live in shadcn.io's own
+site stylesheet — the registry ships no `css` or `cssVars`, and there is no theme
+item to install alongside it. Dropping it in produces completely unstyled badges,
+and it pulls `@base-ui/react`, a second primitives library beside the radix one
+everything else here uses. Re-implementing its class layer by hand would be forty
+lines of CSS to arrive at what `variant="secondary"` already gives.
 
 - `md` (tech stack): `px-2.5 py-0.5`, `text-xs`.
 - `sm` (job badges, post tags, project cards): `px-2 py-0`, `text-[11px]`.
