@@ -31,12 +31,11 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-# Node and Vite build output.
+# Node, Vite and Propshaft build output.
 /node_modules
+/public/assets
 /public/vite
 /public/vite-dev
 /public/vite-test
 
-# Kamal
-.kamal/secrets*
-!/.kamal/secrets.example
+# Kamal — the secrets file holds only $VAR references, so it is safe to commit.

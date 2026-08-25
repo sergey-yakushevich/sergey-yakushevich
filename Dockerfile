@@ -35,6 +35,13 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
+# Node and pnpm build the Vite/Inertia frontend during assets:precompile
+ARG NODE_VERSION=22
+RUN curl -fsSL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - && \
+    apt-get install --no-install-recommends -y nodejs && \
+    corepack enable && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
 # Install application gems
 COPY vendor/* ./vendor/
 COPY Gemfile Gemfile.lock ./
@@ -43,6 +50,10 @@ RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     # -j 1 disable parallel compilation to avoid a QEMU bug: https://github.com/rails/bootsnap/issues/495
     bundle exec bootsnap precompile -j 1 --gemfile
+
+# Install node modules
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
 # Copy application code
 COPY . .
@@ -54,8 +65,8 @@ RUN bundle exec bootsnap precompile -j 1 app/ lib/
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-
-
+# node_modules is only needed to build the assets
+RUN rm -rf node_modules
 
 # Final stage for app image
 FROM base

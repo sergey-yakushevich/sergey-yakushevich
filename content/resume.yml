@@ -11,13 +11,13 @@ availability_label: Remote
 
 social:
   - name: GitHub
-    url: https://github.com/syakushevich
+    url: https://github.com/sergey-yakushevich
     icon: github
   - name: LinkedIn
     url: https://linkedin.com/in/sergey-yakushevich-688a4b179/
     icon: linkedin
   - name: Portfolio
-    url: https://syakushevich.github.io/portfolio
+    url: https://sergey-yakushevich.github.io/portfolio
     icon: globe
 
 bio:
