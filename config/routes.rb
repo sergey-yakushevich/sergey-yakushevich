@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   end
 
   root "pages#home"
+
+  # Visitor tracking beacon (forwarded to the central trackhub API).
+  post "track", to: "tracking#create"
   get "projects", to: "pages#projects"
   get "agents", to: "pages#agents"
 

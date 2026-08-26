@@ -21,7 +21,11 @@ registry:
 env:
   secret:
     - SECRET_KEY_BASE
+    - TRACKHUB_TOKEN
   clear:
+    # Central visitor-tracking API on the internal docker network.
+    TRACKHUB_URL: http://tracker:8080
+    TRACKHUB_SITE: cyberjosef.dev
     SOLID_QUEUE_IN_PUMA: true
     WEB_CONCURRENCY: 1
 

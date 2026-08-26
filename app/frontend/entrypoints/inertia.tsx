@@ -1,5 +1,9 @@
 import { createInertiaApp } from '@inertiajs/react'
 
+import { startTracking } from '../lib/track'
+
+startTracking()
+
 void createInertiaApp({
   pages: "../pages",
 
