@@ -5,7 +5,7 @@ class Post
   FRONT_MATTER = /\A---\s*\n(?<yaml>.*?)\n---\s*\n(?<body>.*)\z/m
   WORDS_PER_MINUTE = 220
 
-  attr_accessor :slug, :title, :summary, :date, :tags, :cover_image, :status, :body
+  attr_accessor :slug, :title, :summary, :date, :tags, :cover_image, :status, :body, :canonical
 
   class << self
     def all
@@ -61,6 +61,7 @@ class Post
         tags: Array(meta["tags"]).map(&:to_s),
         cover_image: meta["cover_image"].presence,
         status: meta["status"].presence || "published",
+        canonical: meta["canonical"].presence,
         body: match[:body]
       )
     rescue StandardError => e
@@ -112,6 +113,6 @@ class Post
   end
 
   def as_detail_json
-    as_summary_json.merge(html: html)
+    as_summary_json.merge(html: html, canonical: canonical)
   end
 end

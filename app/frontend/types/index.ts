@@ -70,6 +70,7 @@ export type PostSummary = {
 
 export type PostDetail = PostSummary & {
   html: string
+  canonical: string | null
 }
 
 export type SharedProps = {

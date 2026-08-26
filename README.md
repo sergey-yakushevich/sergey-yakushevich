@@ -62,6 +62,7 @@ bundle exec kamal rollback <version>
 |---|---|
 | The CV | `content/resume.yml` — one source, read by React *and* the ERB page |
 | Posts | `content/posts/*.md`, YAML front matter, parsed by `app/models/post.rb` |
+| Post images | `public/images/posts/<slug>/` — WebP, imported alongside the post |
 | Design tokens | `app/frontend/entrypoints/application.css` |
 | Project screenshots | `public/images/projects/*.jpg` — retake when a site changes |
 | Post covers | `public/images/posts/*.jpg`, set via `cover_image` in front matter |
@@ -101,7 +102,8 @@ database rows anywhere in the app.
      "Go, Ruby". A reviewer reads the skills list and then looks for the date.
    - No public personal Go project. Every project on the page is Rails.
    - Two `TODO: metric` markers on the Mondido and Regate lead bullets.
-2. **Write posts two and three.**
+2. **Keep writing.** Four posts are imported from Medium; each carries a
+   `canonical` back to the original.
 
 Content rule, enforced across the site: nothing here claims more than the CV
 claims. When Go lands in the Moyasar work history, the site follows — not before.

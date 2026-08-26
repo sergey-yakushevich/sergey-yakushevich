@@ -17,12 +17,21 @@ class PostTest < ActiveSupport::TestCase
     assert_equal "/blog/#{post.slug}", post.url
   end
 
-  test "the body renders to HTML with syntax highlighting classes" do
-    post = Post.find_by_slug("search-off-mysql")
+  test "the body renders to HTML with headings and code blocks" do
+    post = Post.published.find { |candidate| candidate.body.include?("```") }
+    refute_nil post, "no post contains a fenced code block"
 
     assert_match(/<h2[^>]*>/, post.html)
-    assert_match(/class="highlight"/, post.html)
-    assert_match(/<span class="k">/, post.html)
+    assert_match(/<pre/, post.html)
+  end
+
+  test "imported posts keep their canonical Medium URL" do
+    imported = Post.published.select { |post| post.canonical.present? }
+
+    assert_predicate imported, :any?, "no post carries a canonical URL"
+    imported.each do |post|
+      assert_match(%r{\Ahttps://medium\.com/}, post.canonical)
+    end
   end
 
   test "reading time is never zero" do

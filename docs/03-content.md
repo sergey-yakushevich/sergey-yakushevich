@@ -163,8 +163,36 @@ status: published   # or draft
 `draft` posts render in development only, and carry the `--signal-attention`
 marker in the list.
 
-`cover_image` is optional and rendered at 16:9. The first post uses the artwork
-from the old portfolio's home page.
+`cover_image` is optional and rendered at 16:9.
+
+`canonical` marks a post that was published elsewhere first. It emits a
+`<link rel="canonical">` and an "Originally published on Medium" line under the
+subtitle, so search engines credit the original rather than treating this as a
+duplicate.
+
+### The Medium import
+
+The four existing posts came from `medium.com/@sergeyayya` via its RSS feed,
+which carries the whole post body in `content:encoded`. Converted to markdown,
+with images pulled down to `public/images/posts/<slug>/`.
+
+Three things that needed handling, and would need handling again:
+
+- **The tracking pixel.** Every Medium post ends with a 1×1 request to
+  `medium.com/_/stat`. It parses as an `<img>`, so a naive import makes it the
+  cover image — which it silently did for two posts on the first run. The
+  importer skips that host and verifies every download actually decodes as an
+  image.
+- **Code blocks use `<br>`, not newlines.** Reading `<pre>` with `get_text()`
+  collapses every listing onto one line. The `<br>` tags have to be swapped for
+  newlines before the tags are stripped.
+- **Slugs come from the Medium URL**, minus its trailing hex post id, so
+  `/blog/80-20-rule-for-frontend-optimization` matches what Medium published.
+  Slugifying the title instead gave `8020-rule-…`, which would have broken any
+  inbound link.
+
+Images were re-encoded to WebP on the way in: 9.8 MB down to 3.2 MB, with one
+4.9 MB GIF becoming 1.4 MB.
 
 It is a tall 600×877 painting going into a wide slot, so it gets the same
 treatment the portfolio itself uses (`imageWithBlur.css`): the square

@@ -51,7 +51,7 @@ export default function Home({ avatarUrl, posts }: HomeProps) {
             </Link>
           }
         >
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div className="gap-4 md:columns-2 [&>*]:mb-4 [&>*]:break-inside-avoid">
             {posts.map((post, index) => (
               <ArticlePreviewCard
                 key={post.slug}

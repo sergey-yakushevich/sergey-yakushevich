@@ -14,6 +14,7 @@ export default function PostShow({ post }: { post: PostDetail }) {
       <Head>
         <title>{`${post.title} — ${RESUME.name}`}</title>
         <meta name="description" content={post.summary} />
+        {post.canonical && <link rel="canonical" href={post.canonical} />}
       </Head>
 
       <article className="pt-2">
@@ -54,6 +55,21 @@ export default function PostShow({ post }: { post: PostDetail }) {
             </div>
           )}
         </header>
+
+        {post.canonical && (
+          <p className="mt-4 text-sm text-muted-foreground">
+            Originally published on{" "}
+            <a
+              href={post.canonical}
+              target="_blank"
+              rel="noreferrer"
+              className="underline underline-offset-4 hover:text-foreground"
+            >
+              Medium
+            </a>
+            .
+          </p>
+        )}
 
         <hr className="my-8 border-border" />
 
