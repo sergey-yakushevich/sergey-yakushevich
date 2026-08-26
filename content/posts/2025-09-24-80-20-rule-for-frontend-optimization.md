@@ -2,7 +2,7 @@
 title: "80/20 Rule for frontend optimization"
 summary: "Frontend optimization often feels overwhelming — but in reality, most of the performance boost comes from just a few simple fixes."
 date: 2025-09-24
-tags: [perfomance, frontend]
+tags: [performance, frontend, react]
 cover_image: /images/posts/80-20-rule-for-frontend-optimization/01.webp
 canonical: https://medium.com/@sergeyayya/80-20-rule-for-frontend-optimization-819c336a5ddf
 status: published

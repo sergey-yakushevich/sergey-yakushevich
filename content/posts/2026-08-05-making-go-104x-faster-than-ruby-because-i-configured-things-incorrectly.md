@@ -2,7 +2,7 @@
 title: "Making Go 104x faster than Ruby because I configured things incorrectly"
 summary: "I was reading a 2015 Twitter engineering post — Handling five billion sessions a day in real time. Hundreds of thousands of compressed payloads per second, all landing on one ingest tier."
 date: 2026-08-05
-tags: []
+tags: [go, ruby, performance, benchmarks]
 cover_image: /images/posts/making-go-104x-faster-than-ruby-because-i-configured-things-incorrectly/01.webp
 canonical: https://medium.com/@sergeyayya/making-go-104x-faster-than-ruby-because-i-configured-things-incorrectly-eea9ff170faa
 status: published

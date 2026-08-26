@@ -163,6 +163,12 @@ status: published   # or draft
 `draft` posts render in development only, and carry the `--signal-attention`
 marker in the list.
 
+Every post carries `tags`, lowercase and single-word. The imported set arrived
+with tags on only one post, so the rest were written from what each article
+actually covers rather than guessed from its title. The one existing pair kept
+its terms, except `perfomance` was corrected to `performance` — leaving the typo
+would have split the same tag in two.
+
 `cover_image` is rendered at 16:9. Every post has one — the two imported
 without art borrowed it from the old portfolio, the newest taking the home page
 painting and the oldest the about page illustration, both with the same
@@ -203,7 +209,7 @@ treatment the portfolio itself uses (`imageWithBlur.css`): the square
 scaled to fill and blurred. Cropping straight to 16:9 was tried first and cut
 the sword off the top and the rubble off the bottom — half the composition.
 
-The list reads **left to right, top to bottom, oldest first**, on a plain
+The list reads **left to right, top to bottom, newest first**, on a plain
 two-column grid with `items-start`.
 
 It was masonry (CSS columns) briefly, which packed the cards tightly but filled
@@ -212,8 +218,8 @@ posts 1, 3, 2, 4. Packing is not worth a scrambled sequence. `items-start` keeps
 each card at its natural height, which was the reason for masonry in the first
 place.
 
-`Post.published` still returns newest first, because the home page's "recent
-posts" depends on it; the blog controller sorts ascending for display.
+`Post.published` returns newest first, which both the blog index and the home
+page's "recent posts" use directly.
 
 The list page shows title, date and reading time in the mono label style,
 summary, and tags. No excerpt beyond the summary line, no view counter, and no
