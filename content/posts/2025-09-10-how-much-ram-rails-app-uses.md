@@ -3,6 +3,7 @@ title: "How much RAM Rails app uses?"
 summary: "RAM is one of the most important resources for modern web apps. If we run out of RAM, things get really slow."
 date: 2025-09-10
 tags: []
+cover_image: /images/posts/how-much-ram-rails-app-uses/cover.webp
 canonical: https://medium.com/@sergeyayya/how-much-ram-rails-app-uses-442098b9ac25
 status: published
 ---

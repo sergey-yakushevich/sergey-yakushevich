@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    render inertia: "posts/index", props: { posts: Post.published.map(&:as_summary_json) }
+    render inertia: "posts/index", props: { posts: Post.published.sort_by(&:date).map(&:as_summary_json) }
   end
 
   def show

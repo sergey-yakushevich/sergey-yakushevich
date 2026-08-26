@@ -3,6 +3,7 @@ title: "Building a Twitter feed in Go, and then removing most of it."
 summary: "I’m still learning Go, so I skipped “todo list” and went straight to “rebuild a social network used by a sixth of the planet.” The target was 600,000 timeline writes per second."
 date: 2026-08-20
 tags: []
+cover_image: /images/posts/building-a-twitter-feed-in-go-and-then-removing-most-of-it/cover.webp
 canonical: https://medium.com/@sergeyayya/building-a-twitter-feed-in-go-and-then-removing-most-of-it-14cfd513c91a
 status: published
 ---

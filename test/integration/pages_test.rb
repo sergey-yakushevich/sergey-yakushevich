@@ -70,6 +70,21 @@ class PagesTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "the blog index reads oldest to newest" do
+    get blog_path
+    dates = inertia_props["posts"].map { |post| Date.parse(post["date"]) }
+
+    assert_equal dates.sort, dates
+  end
+
+  test "every post has a cover image" do
+    get blog_path
+
+    inertia_props["posts"].each do |post|
+      assert_predicate post["coverImage"], :present?, "#{post["slug"]} has no cover"
+    end
+  end
+
   test "every post cover image is actually on disk" do
     get blog_path
 

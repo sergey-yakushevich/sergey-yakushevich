@@ -33,7 +33,7 @@ export default function PostsIndex({ posts }: PostsIndexProps) {
             Nothing here yet.
           </p>
         ) : (
-          <div className="gap-4 md:columns-2 [&>*]:mb-4 [&>*]:break-inside-avoid">
+          <div className="grid grid-cols-1 items-start gap-4 md:grid-cols-2">
             {posts.map((post, index) => (
               <ArticlePreviewCard
                 key={post.slug}

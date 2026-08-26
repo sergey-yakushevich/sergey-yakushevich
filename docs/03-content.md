@@ -163,7 +163,10 @@ status: published   # or draft
 `draft` posts render in development only, and carry the `--signal-attention`
 marker in the list.
 
-`cover_image` is optional and rendered at 16:9.
+`cover_image` is rendered at 16:9. Every post has one — the two imported
+without art borrowed it from the old portfolio, the newest taking the home page
+painting and the oldest the about page illustration, both with the same
+blurred-backdrop framing.
 
 `canonical` marks a post that was published elsewhere first. It emits a
 `<link rel="canonical">` and an "Originally published on Medium" line under the
@@ -199,6 +202,18 @@ treatment the portfolio itself uses (`imageWithBlur.css`): the square
 `object-cover` crop sits sharp and centred, over a copy of the same artwork
 scaled to fill and blurred. Cropping straight to 16:9 was tried first and cut
 the sword off the top and the rubble off the bottom — half the composition.
+
+The list reads **left to right, top to bottom, oldest first**, on a plain
+two-column grid with `items-start`.
+
+It was masonry (CSS columns) briefly, which packed the cards tightly but filled
+column one top to bottom before starting column two — so reading across gave
+posts 1, 3, 2, 4. Packing is not worth a scrambled sequence. `items-start` keeps
+each card at its natural height, which was the reason for masonry in the first
+place.
+
+`Post.published` still returns newest first, because the home page's "recent
+posts" depends on it; the blog controller sorts ascending for display.
 
 The list page shows title, date and reading time in the mono label style,
 summary, and tags. No excerpt beyond the summary line, no view counter, and no
