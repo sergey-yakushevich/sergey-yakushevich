@@ -185,3 +185,16 @@ projects:
     link:
       label: trydawn.us
       href: https://trydawn.us/glasses
+
+  - title: buildcv
+    category: Side project
+    image: /images/projects/buildcv.jpg
+    stack: Next.js · SQLite · headless Chrome
+    description: >-
+      A free CV builder with no sign-up. Every visitor gets a UUIDv7 in a
+      cookie, keeps unlimited versions, and downloads a real PDF — printed by
+      the same browser engine that renders the page.
+    tech_stack: [Next.js, React, shadcn/ui, SQLite, Puppeteer]
+    link:
+      label: buildcv.cc
+      href: https://buildcv.cc/

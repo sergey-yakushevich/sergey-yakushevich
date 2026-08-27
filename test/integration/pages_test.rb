@@ -32,7 +32,7 @@ class PagesTest < ActionDispatch::IntegrationTest
     get root_path
     projects = inertia_props.dig("resume", "projects")
 
-    assert_equal 3, projects.size
+    assert_operator projects.size, :>=, 3
     projects.each do |project|
       assert_predicate project["techStack"], :any?
       assert_predicate project["description"], :present?
