@@ -427,6 +427,14 @@ token list that goes stale.
 
 ## 8. Syntax highlighting
 
+`.prose-post` binds the typography plugin's own variables to the tokens,
+including `--tw-prose-pre-code` and `--tw-prose-pre-bg`. Those two matter more
+than they look: the plugin ships a near-white `pre` colour meant for its own
+near-black `pre` background. Overriding the background to `--secondary` without
+also setting the text colour left light-grey code on a light-grey panel in the
+light theme — invisible. Dark mode kept working by accident, which is why it
+survived a while.
+
 Rouge emits the token classes; the stylesheet maps them onto the design tokens.
 Greyscale plus the three signal colours, with weight and opacity carrying most of
 the structure rather than hue:
