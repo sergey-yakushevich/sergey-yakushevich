@@ -1,11 +1,16 @@
 /**
- * Lightweight, fire-and-forget visitor tracking (ported from sickstuff.shop).
+ * Visitor tracking wiring for this site.
  *
- * `startTracking()` is called once from the Inertia entrypoint and owns all
- * ambient tracking: a `page_view` (with dwell time) for the initial load and
- * every Inertia navigation, `cta_click` for elements marked `data-track-cta`,
- * and `form_field` the first time each form field is filled in (fired on
- * blur, so abandoned forms are recorded too).
+ * Page views, dwell time and engagement (active time, attention time, scroll
+ * depth, whether the visitor moved, scrolled, tapped or typed) come from the
+ * shared trackhub tracker at /trk/t.js, which every site now loads. This file
+ * used to carry its own copy of that logic; four copies drifted apart and one
+ * of them silently dropped every visitor's client context, which is why there
+ * is now exactly one.
+ *
+ * What stays here is site-specific: `cta_click` for elements marked
+ * `data-track-cta`, and `form_field` the first time each form field is filled
+ * in (fired on blur, so abandoned forms are recorded too).
  *
  * Beacons go to POST /track on this app, which forwards them server-side to
  * the central trackhub API. Nothing here blocks rendering and tracking must
@@ -15,9 +20,13 @@
 import { router } from '@inertiajs/react'
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 
+const TRACKER_SRC = import.meta.env.VITE_TRACKHUB_SCRIPT ?? 'https://cyberjosef.dev/trk/t.js'
+
+/** localStorage key for the visitor token. Unchanged, so returning visitors
+ *  stay the same visitor rather than all looking new on deploy day. */
 const TOKEN_KEY = 'cj_vid'
 
-type EventName = 'page_view' | 'cta_click' | 'form_field'
+type EventName = 'cta_click' | 'form_field'
 
 type EventOptions = {
   label?: string
@@ -25,170 +34,68 @@ type EventOptions = {
   meta?: Record<string, unknown>
 }
 
-function uuid(): string {
-  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
-    return crypto.randomUUID()
-  }
-  return `${Date.now()}-${Math.random().toString(36).slice(2)}`
+type TrackhubAPI = {
+  __loaded?: boolean
+  q?: unknown[][]
+  pageview?: (path?: string) => void
+  event?: (name: string, options?: EventOptions) => void
+  fingerprint?: (value: string) => void
 }
 
-function visitorToken(): string {
+declare global {
+  interface Window {
+    trackhub?: TrackhubAPI
+  }
+}
+
+/**
+ * Calls the shared tracker, queueing when the script has not landed yet.
+ * Every path swallows its errors: tracking must never break the page.
+ */
+function call(method: string, ...args: unknown[]): void {
+  if (typeof window === 'undefined') return
+
   try {
-    let token = localStorage.getItem(TOKEN_KEY)
-    if (!token) {
-      token = uuid()
-      localStorage.setItem(TOKEN_KEY, token)
+    if (!window.trackhub) window.trackhub = { q: [] }
+    const api = window.trackhub
+
+    if (api.__loaded) {
+      const fn = (api as Record<string, unknown>)[method]
+      if (typeof fn === 'function') (fn as (...a: unknown[]) => void)(...args)
+      return
     }
-    return token
+
+    if (!api.q) api.q = []
+    api.q.push([method, ...args])
   } catch {
-    return uuid()
+    // Tracking must never break the page.
   }
 }
 
-let cachedFingerprint: string | null = null
+export function trackEvent(name: EventName, options: EventOptions = {}): void {
+  call('event', name, options)
+}
 
-async function getFingerprint(): Promise<string> {
-  if (cachedFingerprint) return cachedFingerprint
+function loadTracker(): void {
+  if (document.querySelector('script[data-trackhub]')) return
+
+  const script = document.createElement('script')
+  script.src = TRACKER_SRC
+  script.async = true
+  script.dataset.trackhub = ''
+  script.dataset.endpoint = '/track'
+  script.dataset.key = TOKEN_KEY
+  document.head.appendChild(script)
+}
+
+async function reportFingerprint(): Promise<void> {
   try {
     const fp = await FingerprintJS.load()
     const result = await fp.get()
-    cachedFingerprint = result.visitorId
-    return cachedFingerprint
+    if (result.visitorId) call('fingerprint', result.visitorId)
   } catch {
-    return ''
+    // A missing fingerprint costs device grouping, nothing more.
   }
-}
-
-function clientContext(): Record<string, unknown> {
-  const params = new URLSearchParams(window.location.search)
-  return {
-    screen_w: window.screen?.width,
-    screen_h: window.screen?.height,
-    viewport_w: window.innerWidth,
-    viewport_h: window.innerHeight,
-    device_pixel_ratio: window.devicePixelRatio,
-    language: navigator.language,
-    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    referrer: document.referrer || null,
-    landing_path: window.location.pathname,
-    utm_source: params.get('utm_source'),
-    utm_medium: params.get('utm_medium'),
-    utm_campaign: params.get('utm_campaign'),
-    utm_content: params.get('utm_content'),
-    utm_term: params.get('utm_term'),
-  }
-}
-
-function send(body: Record<string, unknown>): void {
-  const json = JSON.stringify(body)
-
-  if (navigator.sendBeacon) {
-    const blob = new Blob([json], { type: 'application/json' })
-    if (navigator.sendBeacon('/track', blob)) return
-  }
-
-  void fetch('/track', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: json,
-    keepalive: true,
-  }).catch(() => {
-    // Tracking must never break the page.
-  })
-}
-
-/** Synchronous envelope, usable from unload handlers. */
-function envelopeSync(): Record<string, unknown> {
-  return { token: visitorToken() }
-}
-
-let contextSent = false
-
-/** Shared envelope, attaching one-time client context + fingerprint. */
-async function envelope(): Promise<Record<string, unknown>> {
-  const body = envelopeSync()
-
-  if (!contextSent) {
-    contextSent = true
-    const fingerprint = await getFingerprint()
-    Object.assign(body, clientContext(), { device_fingerprint: fingerprint || null })
-  }
-
-  return body
-}
-
-export async function trackEvent(name: EventName, options: EventOptions = {}): Promise<void> {
-  if (typeof window === 'undefined') return
-
-  try {
-    send({
-      ...(await envelope()),
-      event: {
-        id: uuid(),
-        name,
-        label: options.label ?? null,
-        path: options.path ?? window.location.pathname,
-        occurred_at: new Date().toISOString(),
-        meta: options.meta ?? null,
-      },
-    })
-  } catch {
-    // Tracking must never break the page.
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Page views + dwell time
-// ---------------------------------------------------------------------------
-
-type OpenPageView = {
-  id: string
-  path: string
-  activeMs: number
-  resumedAt: number | null
-}
-
-let openPageView: OpenPageView | null = null
-
-function accumulate(view: OpenPageView): void {
-  if (view.resumedAt === null) return
-  view.activeMs += Date.now() - view.resumedAt
-  view.resumedAt = null
-}
-
-function closePageView(): void {
-  const view = openPageView
-  if (!view) return
-  openPageView = null
-
-  accumulate(view)
-  // Deliberately synchronous: runs on unload, where a promise continuation is
-  // not guaranteed to execute.
-  send({
-    ...envelopeSync(),
-    event: { id: view.id, name: 'page_view', path: view.path, duration_ms: view.activeMs },
-  })
-}
-
-export function trackPageView(path = window.location.pathname): void {
-  if (typeof window === 'undefined') return
-  if (openPageView?.path === path) return
-
-  closePageView()
-
-  const view: OpenPageView = { id: uuid(), path, activeMs: 0, resumedAt: Date.now() }
-  openPageView = view
-
-  void (async () => {
-    try {
-      send({
-        ...(await envelope()),
-        event: { id: view.id, name: 'page_view', path, occurred_at: new Date().toISOString() },
-      })
-    } catch {
-      // Tracking must never break the page.
-    }
-  })()
 }
 
 // ---------------------------------------------------------------------------
@@ -201,20 +108,13 @@ export function startTracking(): void {
   if (typeof window === 'undefined' || started) return
   started = true
 
-  // Page views: initial load + every Inertia visit, with dwell measurement
-  // paused while the tab is hidden.
-  trackPageView()
-  router.on('navigate', () => trackPageView())
-  window.addEventListener('pagehide', closePageView)
-  document.addEventListener('visibilitychange', () => {
-    const view = openPageView
-    if (!view) return
-    if (document.visibilityState === 'hidden') {
-      accumulate(view)
-    } else if (view.resumedAt === null) {
-      view.resumedAt = Date.now()
-    }
-  })
+  loadTracker()
+  void reportFingerprint()
+
+  // The shared tracker hooks the history API, which Inertia navigations go
+  // through, so page views are already covered. This is the explicit belt to
+  // that braces; the tracker de-duplicates by path, so it costs nothing.
+  router.on('navigate', () => call('pageview'))
 
   // CTA clicks: anything marked data-track-cta.
   document.addEventListener(
@@ -228,7 +128,7 @@ export function startTracking(): void {
       if (cta) {
         const named = cta.dataset.trackCta?.trim()
         const label = named && named !== 'true' ? named : elementLabel(el)
-        void trackEvent('cta_click', { label })
+        trackEvent('cta_click', { label })
       }
     },
     true
@@ -249,7 +149,7 @@ export function startTracking(): void {
     if (reported.has(key)) return
     reported.add(key)
 
-    void trackEvent('form_field', {
+    trackEvent('form_field', {
       label: humanize(field),
       meta: { field, value: previewValue(el, value) },
     })
