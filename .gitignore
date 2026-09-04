@@ -40,3 +40,4 @@
 
 # Kamal — the secrets file holds only $VAR references, so it is safe to commit.
 .kamal/trackhub_token
+.kamal/secret_key_base
