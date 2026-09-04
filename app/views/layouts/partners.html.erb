@@ -250,6 +250,10 @@
       .hero-card-slot { display: flex; justify-content: center; padding: 12px 20px; }
 
       .access-card {
+        --card-metal: linear-gradient(203.33deg, #111111 1.16%, #333333 14.27%, #555555 34.09%, #444444 53.64%, #222222 80.17%, #111111 100%);
+        --card-ink: #FFFFFF;
+        --card-ink-muted: rgba(255, 255, 255, 0.4);
+        --card-edge: rgba(255, 255, 255, 0.14);
         position: relative;
         width: 272px;
         height: 336px;
@@ -259,60 +263,55 @@
         will-change: transform;
         box-shadow: 0 24px 48px -24px rgba(0, 0, 0, 0.5);
       }
+      .dark .access-card {
+        --card-metal: linear-gradient(203.33deg, #8A8A8E 1.16%, #D8D8DC 14.27%, #EFEFF3 34.09%, #C4C4C8 53.64%, #9A9A9E 77.55%, #7E7E82 100%);
+        --card-ink: #222226;
+        --card-ink-muted: rgba(0, 0, 0, 0.45);
+        --card-edge: rgba(255, 255, 255, 0.35);
+      }
       .access-card-bg {
         position: absolute; inset: 0; border-radius: 12px;
-        background: linear-gradient(203.33deg, #8A8A8E 1.16%, #D8D8DC 14.27%, #EFEFF3 34.09%, #C4C4C8 53.64%, #9A9A9E 77.55%, #7E7E82 100%);
+        background: var(--card-metal);
       }
       .access-card-edge {
         position: absolute; inset: 0; z-index: 20;
         border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        border: 1px solid var(--card-edge);
         pointer-events: none;
       }
-      .access-card-glare {
-        position: absolute; inset: 0; z-index: 15;
-        border-radius: 12px;
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity .3s ease-out;
-        mix-blend-mode: soft-light;
-        background: radial-gradient(220px circle at var(--gx, 50%) var(--gy, 50%),
-                    rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 60%);
-      }
-      .access-card:hover .access-card-glare { opacity: 1; }
       .access-card-head {
         position: absolute; left: 22px; top: 28px; z-index: 10;
         display: flex; flex-direction: column; text-align: left;
       }
-      .access-card .mark { display: block; height: 46px; width: 42px; background-color: #222226; }
+      .access-card .mark { display: block; height: 46px; width: 42px; background-color: var(--card-ink); }
       .access-card .card-title {
         margin: 12px 0 0; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
-        color: #222226;
+        color: var(--card-ink);
       }
       .access-card .card-label {
         font-family: ui-monospace, "SF Mono", Menlo, monospace;
         margin: 5px 0 0; font-size: 10px; font-weight: 500;
         text-transform: uppercase; letter-spacing: 0.05em;
-        color: rgba(0, 0, 0, 0.45);
+        color: var(--card-ink-muted);
       }
       .access-card .card-label.gap { margin-top: 54px; }
       .access-card .card-name {
         font-family: ui-monospace, "SF Mono", Menlo, monospace;
         margin: 5px 0 0; font-size: 14px; font-weight: 500;
         text-transform: uppercase; letter-spacing: 0.05em;
-        color: #222226;
+        color: var(--card-ink);
       }
       .access-card .card-role {
         font-family: ui-monospace, "SF Mono", Menlo, monospace;
         position: absolute; left: 22px; bottom: 20px; z-index: 10;
         margin: 0; font-size: 10px; font-weight: 500;
         text-transform: uppercase; letter-spacing: 0.05em;
-        color: rgba(0, 0, 0, 0.45);
+        color: var(--card-ink-muted);
       }
       .access-card .card-qr {
         position: absolute; right: 20px; bottom: 20px; z-index: 10;
         height: 50px; width: 50px;
-        background-color: #222226; opacity: 0.5;
+        background-color: var(--card-ink); opacity: 0.5;
       }
 
       .marquee {
@@ -506,8 +505,6 @@
           var py = (e.clientY - r.top) / r.height;
           var ry = (px - 0.5) * 10;
           var rx = (0.5 - py) * 10;
-          card.style.setProperty('--gx', (px * 100) + '%');
-          card.style.setProperty('--gy', (py * 100) + '%');
           if (raf) cancelAnimationFrame(raf);
           raf = requestAnimationFrame(function () {
             card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
