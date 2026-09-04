@@ -15,4 +15,8 @@ class PagesController < ApplicationController
     @posts = Post.published
     render layout: "plain"
   end
+
+  def test_partners
+    render layout: "partners"
+  end
 end

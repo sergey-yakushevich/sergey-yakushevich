@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post "track", to: "tracking#create"
   get "projects", to: "pages#projects"
   get "agents", to: "pages#agents"
+  get "test-partners", to: "pages#test_partners"
 
   get "blog", to: "posts#index", as: :blog
   get "blog/:slug", to: "posts#show", as: :post, constraints: { slug: /[a-z0-9\-]+/ }

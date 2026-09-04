@@ -1,0 +1,312 @@
+<% content_for :title, "Your audience. My code. 50/50." %>
+
+<header class="header">
+  <div class="page">
+    <a class="wordmark" href="<%= root_path %>">cyberjosef</a>
+    <a class="btn btn--primary btn--sm" href="#start">Get your app</a>
+  </div>
+</header>
+
+<main>
+
+  <section style="padding: 64px 0 8px">
+    <div class="page">
+      <div class="row" style="margin-bottom:20px">
+        <span class="chip chip--accent">App partnership for creators · open</span>
+      </div>
+
+      <h1 class="display-xl" style="max-width:16ch">Your audience.<br>My code. 50/50.</h1>
+
+      <p class="body muted" style="font-size:17px; line-height:1.5; max-width:52ch; margin:16px 0 28px">
+        You spent years earning trust in a niche where people actually pay — investing,
+        taxes, personal finance. I'm a senior engineer who ships whole products alone.
+        I build an app for your audience, under your brand, entirely at my cost.
+        You launch it to your people. We split what it earns, every month, for as long
+        as it earns.
+      </p>
+
+      <div class="row gap-3">
+        <a class="btn btn--primary" href="#start">See the deal</a>
+        <a class="btn btn--outline" href="#how">How it works</a>
+      </div>
+
+      <div class="grid g3" style="margin-top:40px; padding-top:24px; border-top:1px solid var(--sss-hairline); gap:24px">
+        <div>
+          <div class="h1 tnum">$0</div>
+          <p class="micro faint">Your upfront cost — development is on me</p>
+        </div>
+        <div>
+          <div class="h1 tnum">50%</div>
+          <p class="micro faint">Your share of revenue, paid monthly</p>
+        </div>
+        <div>
+          <div class="h1 tnum">10 yrs</div>
+          <p class="micro faint">Backend engineering, five of them in payments</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="how">
+    <div class="page">
+      <div class="section-head">
+        <h2 class="h2">How it works</h2>
+        <p class="body measure">Five steps. Your total time is a couple of calls and the posts you'd write anyway.</p>
+      </div>
+
+      <% steps = [
+        { n: "01", title: "We pick the app together", we_when: "1 call",
+          we: ["I bring data on what already sells in your niche",
+               "We settle on one tool your audience keeps asking for — a tax estimator, a portfolio tracker, a calculator they currently do in spreadsheets",
+               "We put the terms in writing before I write a line of code"],
+          you_when: "1 hour", you: "Tell me what your audience complains about. You already know." },
+        { n: "02", title: "I build it, at my cost", we_when: "4–8 weeks",
+          we: ["Design, code, servers, app store accounts — every expense is mine",
+               "Your name, your colors, your logo. To your audience it is your app",
+               "You see progress builds along the way, not a surprise at the end"],
+          you_when: "0 min", you: "Nothing. Maybe react to a screenshot." },
+        { n: "03", title: "Free beta for your audience", we_when: "2–4 weeks",
+          we: ["I run the beta, read every piece of feedback and answer support myself",
+               "We learn what people actually use before anyone pays a cent"],
+          you_when: "1 post", you: "Announce the beta. Free tool for your people — the easiest post you'll make all year." },
+        { n: "04", title: "We polish the rough edges", we_when: "1–2 weeks",
+          we: ["Feedback goes into the product, fast", "We set the price together based on what the beta showed"],
+          you_when: "30 min", you: "One call to agree on pricing and launch." },
+        { n: "05", title: "Paid launch — and it keeps paying", we_when: "Every month",
+          we: ["I run servers, support, updates and new features",
+               "Revenue splits 50/50 and pays out monthly",
+               "You see the payment dashboard itself, not screenshots of it"],
+          you_when: "Your call", you: "Promote it when it fits your content. Every post now feeds an asset you half-own." }
+      ] %>
+
+      <% steps.each do |step| %>
+        <div style="margin-top:20px">
+          <div class="row" style="gap:10px; margin-bottom:8px">
+            <span class="micro faint tnum"><%= step[:n] %></span>
+            <h3 class="h3"><%= step[:title] %></h3>
+          </div>
+          <div class="grid g2">
+            <div class="card" style="padding:16px 18px">
+              <div class="row" style="justify-content:space-between; margin-bottom:10px">
+                <span class="label">What I do</span>
+                <span class="chip"><%= step[:we_when] %></span>
+              </div>
+              <ul style="margin:0; padding-left:18px">
+                <% step[:we].each do |line| %>
+                  <li class="body-sm muted" style="margin-bottom:4px"><%= line %></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="card card--sunk" style="padding:16px 18px">
+              <div class="row" style="justify-content:space-between; margin-bottom:10px">
+                <span class="label">What you do</span>
+                <span class="chip"><%= step[:you_when] %></span>
+              </div>
+              <ul style="margin:0; padding-left:18px">
+                <li class="body-sm muted"><%= step[:you] %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page">
+      <div class="section-head">
+        <h2 class="h2">A sponsorship pays once. An app pays every month.</h2>
+        <p class="body measure">You already know the sponsorship treadmill: negotiate, post, get paid, start over. An app you half-own doesn't reset to zero on the first of the month.</p>
+      </div>
+
+      <div class="grid g2">
+        <div class="card">
+          <p class="label muted" style="margin-bottom:8px">Where the money goes</p>
+          <div class="table-wrap">
+            <table class="dtable">
+              <tbody>
+                <tr>
+                  <td data-label="Split">Revenue split</td>
+                  <td class="num">50 / 50</td>
+                </tr>
+                <tr>
+                  <td data-label="Development">Development, design, servers, support</td>
+                  <td class="num">my cost</td>
+                </tr>
+                <tr>
+                  <td data-label="Promotion">Promotion to your audience</td>
+                  <td class="num">your side</td>
+                </tr>
+                <tr>
+                  <td data-label="Payout">Payout</td>
+                  <td class="num">monthly</td>
+                </tr>
+                <tr>
+                  <td data-label="Duration">How long you get paid</td>
+                  <td class="num">as long as it sells</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <p class="label muted" style="margin-bottom:8px">The arithmetic at $10/month per subscriber</p>
+          <div class="table-wrap">
+            <table class="dtable">
+              <thead>
+                <tr><th>Paying users</th><th class="num">App revenue / mo</th><th class="num">Your half / mo</th></tr>
+              </thead>
+              <tbody>
+                <tr><td data-label="Paying users">200</td><td class="num">$2,000</td><td class="num paid">$1,000</td></tr>
+                <tr><td data-label="Paying users">500</td><td class="num">$5,000</td><td class="num paid">$2,500</td></tr>
+                <tr><td data-label="Paying users">2,000</td><td class="num">$20,000</td><td class="num paid">$10,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="micro faint" style="margin-top:14px">
+            This is arithmetic, not a promise — your audience sets the first column.
+            But note what it does over time: a $2,500 month repeats next month.
+            A $2,500 sponsorship doesn't.
+          </p>
+        </div>
+      </div>
+
+      <div class="card card--accent" style="margin-top:16px">
+        <h3 class="h3" style="margin-bottom:8px">The outcome we're actually building</h3>
+        <p class="body-sm muted measure">
+          Income that doesn't depend on the next brand deal landing. You stop selling
+          one-off posts to other people's products and start owning half of one built
+          for your audience. Your content keeps working — but now it compounds into
+          something that pays you in months when you don't post at all.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page">
+      <div class="section-head"><h2 class="h2">Who's asking</h2></div>
+
+      <div class="card">
+        <p class="h3">Sergey Yakushevich</p>
+        <p class="micro faint" style="margin-top:4px">Senior backend engineer · Batumi, Georgia</p>
+        <p class="body-sm muted" style="margin-top:12px; max-width:68ch">
+          Ten years on backends, the last five on payment systems. At Moyasar I built
+          fraud blocking and regulatory KYC on a platform that has processed 350M+
+          payments. Money moving safely through software is literally my day job —
+          useful when your revenue runs through the app I built.
+        </p>
+        <p class="body-sm muted" style="margin-top:12px; max-width:68ch">
+          I got tired of renting my hours to a 9–5. On my own I've shipped complete
+          products end to end — an online shop with a 3D product customizer, a grocery
+          price-comparison app, an analytics platform — design to deployment, alone.
+          I can build things people pay for. What I don't have is your audience.
+          That's the whole deal: I bring the product, you bring the trust.
+        </p>
+        <div class="row gap-3" style="margin-top:20px">
+          <a class="btn btn--outline btn--sm" href="https://cyberjosef.dev" target="_blank" rel="noopener">cyberjosef.dev</a>
+          <a class="btn btn--outline btn--sm" href="https://github.com/sergey-yakushevich" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="start">
+    <div class="page">
+      <div class="grid g2" style="align-items:start">
+        <div>
+          <h2 class="h2" style="margin-bottom:12px">The whole deal on one card</h2>
+          <p class="body muted measure">No tiers, no invoices, no retainer. I carry the build risk, you carry the launch, and the split never changes.</p>
+
+          <div class="card card--accent" style="margin-top:24px">
+            <h3 class="h3" style="margin-bottom:10px">Worst case, priced honestly</h3>
+            <p class="body-sm muted">If the app flops, you've spent a couple of calls and a few posts about a free tool for your audience. I've spent two months of engineering. That asymmetry is deliberate — I only win if you do.</p>
+          </div>
+        </div>
+
+        <div class="card" style="border-radius:var(--sss-radius-sheet); padding:28px">
+          <p class="label muted">Your share</p>
+          <div class="row" style="align-items:baseline; gap:10px; margin:6px 0 4px">
+            <span class="tnum" style="font-size:clamp(40px,10vw,52px); font-weight:700; letter-spacing:-0.03em; line-height:1">50%</span>
+            <span class="body muted">of revenue, monthly</span>
+          </div>
+          <p class="micro faint" style="margin-bottom:22px">for as long as the app is sold</p>
+
+          <ul style="list-style:none; margin:0; padding:0">
+            <% [
+              ["$0 from your pocket.", "Development, servers, stores, support — all my cost."],
+              ["Your brand on it.", "Your name, your design, your voice. My name stays in the commit log."],
+              ["Free beta first.", "Your audience gets it free until it's actually good."],
+              ["Terms in writing", "before any code exists. Either side can walk away."],
+              ["Full transparency.", "You see the payment dashboard itself, not monthly screenshots."],
+              ["No exclusivity, no post quota, no deadline.", nil]
+            ].each do |strong, rest| %>
+              <li class="body-sm muted" style="padding:10px 0; border-top:1px solid var(--sss-hairline)">
+                <strong style="color:var(--sss-ink); font-weight:600"><%= strong %></strong>
+                <%= " #{rest}" if rest %>
+              </li>
+            <% end %>
+          </ul>
+
+          <a class="btn btn--primary" style="width:100%; margin-top:24px"
+             href="mailto:sergeyayya@gmail.com?subject=<%= u("App partnership") %>">Tell me about your audience</a>
+          <p class="micro faint" style="text-align:center; margin-top:12px">
+            Reply to the message that brought you here, or write to
+            <a class="link" href="mailto:sergeyayya@gmail.com">sergeyayya@gmail.com</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page">
+      <div class="section-head"><h2 class="h2">Straight answers</h2></div>
+      <% [
+        ["What does this cost me?",
+         "Nothing in money. Your cost is attention: a call to pick the app, a call to price it, and the posts around the beta and the launch. Every dollar-shaped expense — development, design, servers, app stores, support — is mine."],
+        ["Why would you build a whole app for free?",
+         "It's not free — it's an investment. I'm betting weeks of engineering that your audience converts. If I wanted to sell you development hours, I'd send you a quote. I'd rather own half of something that pays for years."],
+        ["Who owns the app?",
+         "We agree on it in writing before I start, and you keep a copy. The default: the brand and the audience are yours, the code is mine, and neither of us can sell or license the product without the other. Symmetric on purpose."],
+        ["What if it flops?",
+         "Then it flops. You're out a few posts about a free tool — hard to damage trust with a gift. I'm out the build time. You owe me nothing, there's no clawback, no invoice arrives later."],
+        ["How do I know the revenue numbers are real?",
+         "You get access to the payment provider's dashboard — the same screen I see, not an export I prepared. Payments infrastructure is my profession; opaque money handling is exactly what I spent five years building systems against."],
+        ["What if we disagree a year in?",
+         "The written terms cover exit: either side can stop promoting or stop developing, and the split stays on revenue the app keeps earning. Nobody gets held hostage."],
+        ["My audience is small. Does this still work?",
+         "Size matters less than trust. Five thousand people who act on your tax advice beat a hundred thousand who scroll past. If people reply to your posts and ask you questions, that's the signal I look for."],
+        ["Why should you get half when it's my audience?",
+         "Fair question — flip it: why should I get half when it's my code? The split works because neither half is worth anything alone. Your audience with no product earns sponsorship money. My product with no audience earns zero. Together they earn every month."]
+      ].each do |question, answer| %>
+        <details>
+          <summary>
+            <%= question %>
+            <span class="faint" aria-hidden="true" style="font-size:20px; line-height:1; flex:none">+</span>
+          </summary>
+          <p class="body-sm muted"><%= answer %></p>
+        </details>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page" style="text-align:center; padding-top:24px">
+      <h2 class="h1" style="margin-bottom:12px">Not sure what app fits your audience?</h2>
+      <p class="body muted" style="margin:0 auto 24px; max-width:54ch">Send me your channel. I'll look properly and tell you honestly what would sell there — even if you end up building it with someone else.</p>
+      <a class="btn btn--primary" href="mailto:sergeyayya@gmail.com?subject=<%= u("App partnership") %>">Write to me</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="page">
+    <div>
+      <span class="wordmark" style="display:block">cyberjosef</span>
+      <p class="micro faint" style="margin-top:8px">Sergey Yakushevich · <a class="link" href="https://cyberjosef.dev">cyberjosef.dev</a> · <a class="link" href="mailto:sergeyayya@gmail.com">sergeyayya@gmail.com</a></p>
+    </div>
+  </div>
+</footer>
