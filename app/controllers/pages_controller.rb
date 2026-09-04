@@ -18,6 +18,8 @@ class PagesController < ApplicationController
 
   def test_partners
     @projects = Resume.data[:projects]
+    @niche = TestPartnerNiches::ALL[params[:niche]]
+    @proof_apps = @niche ? @niche[:apps] : TestPartnerNiches::DEFAULT_APPS
     render layout: "partners"
   end
 end

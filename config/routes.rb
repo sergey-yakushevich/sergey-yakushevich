@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "projects", to: "pages#projects"
   get "agents", to: "pages#agents"
   get "test-partners", to: "pages#test_partners"
+  get "test-partners/:niche", to: "pages#test_partners", as: :test_partners_niche,
+      constraints: { niche: /adhd|marketplace-sellers|finance|job-search|no-fap/ }
 
   get "blog", to: "posts#index", as: :blog
   get "blog/:slug", to: "posts#show", as: :post, constraints: { slug: /[a-z0-9\-]+/ }

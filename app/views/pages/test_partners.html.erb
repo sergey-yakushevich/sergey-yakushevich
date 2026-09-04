@@ -1,4 +1,4 @@
-<% content_for :title, "I'll build your audience an app. You pay nothing." %>
+<% content_for :title, @niche ? "#{@niche[:card_title]}. You pay nothing. — cyberjosef" : "I'll build your audience an app. You pay nothing. — cyberjosef" %>
 
 <header class="header">
   <div class="page">
@@ -24,20 +24,39 @@
 
   <section style="padding: 64px 0 8px">
     <div class="page">
-      <div class="row" style="margin-bottom:20px">
-        <span class="chip chip--accent">For creators in paying niches — investing, taxes, finance</span>
-      </div>
+      <div class="hero-grid">
+        <div>
+          <h1 class="display-xl" style="max-width:18ch">I'll build your audience an app. You pay nothing.</h1>
 
-      <h1 class="display-xl" style="max-width:18ch">I'll build your audience an app. You pay nothing.</h1>
+          <p class="body muted" style="font-size:17px; line-height:1.5; max-width:44ch; margin:16px 0 28px">
+            You post about it — I do everything else. Code, servers, support: every bill is mine.
+            The app earns money, we split it 50/50. Every month.
+          </p>
 
-      <p class="body muted" style="font-size:17px; line-height:1.5; max-width:44ch; margin:16px 0 28px">
-        You post about it — I do everything else. Code, servers, support: every bill is mine.
-        The app earns money, we split it 50/50. Every month.
-      </p>
+          <div class="row gap-3">
+            <a class="btn btn--primary" href="#start">Get your app</a>
+            <a class="btn btn--outline" href="#how">How it works</a>
+          </div>
+        </div>
 
-      <div class="row gap-3">
-        <a class="btn btn--primary" href="#start">Get your app</a>
-        <a class="btn btn--outline" href="#how">How it works</a>
+        <div class="hero-card-slot">
+          <div class="access-card" data-tilt-card>
+            <div class="access-card-bg"></div>
+            <div class="access-card-glare"></div>
+            <div class="access-card-edge"></div>
+
+            <div class="access-card-head">
+              <span class="mark" data-card-mark aria-hidden="true"></span>
+              <p class="card-title"><%= @niche ? @niche[:card_title] : "Your audience's app" %></p>
+              <p class="card-label">Partner access</p>
+              <p class="card-label gap">Founding partner · 50/50</p>
+              <p class="card-name">Your brand</p>
+            </div>
+
+            <p class="card-role"><%= @niche ? @niche[:card_role] : "Creator" %></p>
+            <div class="card-qr" data-card-qr aria-hidden="true"></div>
+          </div>
+        </div>
       </div>
 
       <div class="grid g3" style="margin-top:40px; padding-top:24px; border-top:1px solid var(--sss-hairline); gap:24px">
@@ -142,6 +161,32 @@
           </div>
         </div>
       <% end %>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="page">
+      <div class="section-head">
+        <h2 class="h2"><%= @niche ? @niche[:proof_head] : "Apps like this already print money" %></h2>
+        <p class="body measure"><%= @niche ? @niche[:proof_sub] : "Small teams in paying niches, public numbers. Your audience already pays for tools like these — just not for yours yet." %></p>
+      </div>
+
+      <div class="marquee">
+        <div class="marquee-track">
+          <% (@proof_apps * 2).each do |app| %>
+            <div class="proof-card">
+              <div class="proof-top">
+                <h3 class="h3"><%= app[:name] %></h3>
+                <img class="proof-logo" src="https://www.google.com/s2/favicons?domain=<%= app[:domain] %>&sz=128" alt="<%= app[:name] %> logo" loading="lazy">
+              </div>
+              <div class="proof-revenue"><%= app[:stat] %></div>
+              <p class="micro faint" style="margin-top:4px"><%= app[:stat_label] %></p>
+              <p class="body-sm muted" style="margin-top:10px"><%= app[:note] %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <p class="micro faint" style="margin-top:14px">Public numbers: funding announcements, Starter Story, founder interviews. Rounded. Not my apps — the point is that the market pays.</p>
     </div>
   </section>
 
