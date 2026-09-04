@@ -3,7 +3,20 @@
 <header class="header">
   <div class="page">
     <a class="wordmark" href="<%= root_path %>">cyberjosef</a>
-    <a class="btn btn--primary btn--sm" href="#start">Get your app</a>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+      </button>
+      <a class="btn btn--primary btn--sm" href="#start">Get your app</a>
+    </div>
   </div>
 </header>
 
@@ -186,7 +199,7 @@
 
   <section class="section">
     <div class="page">
-      <div class="section-head"><h2 class="h2">Who's asking</h2></div>
+      <div class="section-head"><h2 class="h2">Who am I</h2></div>
 
       <div class="card">
         <p class="h3">Sergey Yakushevich</p>
@@ -206,7 +219,53 @@
         </p>
         <div class="row gap-3" style="margin-top:20px">
           <a class="btn btn--outline btn--sm" href="https://cyberjosef.dev" target="_blank" rel="noopener">cyberjosef.dev</a>
+          <a class="btn btn--outline btn--sm" href="https://x.com/muffinmanin" target="_blank" rel="noopener">X</a>
+          <a class="btn btn--outline btn--sm" href="https://www.instagram.com/sergeyayya_" target="_blank" rel="noopener">Instagram</a>
           <a class="btn btn--outline btn--sm" href="https://github.com/sergey-yakushevich" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <div style="margin-top:40px">
+        <div class="row" style="justify-content:space-between; margin-bottom:20px">
+          <div>
+            <h3 class="h3">Apps I've already shipped</h3>
+            <p class="body-sm muted" style="margin-top:6px">Live, in production, built end to end by one person.</p>
+          </div>
+          <div class="row" style="gap:8px">
+            <button type="button" class="carousel-nav" data-carousel-nav="apps-carousel" data-prev aria-label="Previous app">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button type="button" class="carousel-nav" data-carousel-nav="apps-carousel" aria-label="Next app">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="carousel" id="apps-carousel">
+          <% @projects.each do |project| %>
+            <div class="card">
+              <img class="carousel-img" src="<%= project[:image] %>" alt="<%= project[:title] %>" loading="lazy">
+              <div class="carousel-body">
+                <div class="row" style="justify-content:space-between; gap:8px">
+                  <h4 class="h3"><%= project[:title] %></h4>
+                  <span class="chip"><%= project[:category] %></span>
+                </div>
+                <p class="body-sm muted"><%= project[:description] %></p>
+                <div class="row-chips">
+                  <% project[:tech_stack].each do |tech| %>
+                    <span class="chip"><%= tech %></span>
+                  <% end %>
+                </div>
+                <a class="link body-sm" href="<%= project[:link][:href] %>" target="_blank" rel="noopener"><%= project[:link][:label] %></a>
+              </div>
+            </div>
+          <% end %>
         </div>
       </div>
     </div>

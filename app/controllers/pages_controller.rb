@@ -17,6 +17,7 @@ class PagesController < ApplicationController
   end
 
   def test_partners
+    @projects = Resume.data[:projects]
     render layout: "partners"
   end
 end

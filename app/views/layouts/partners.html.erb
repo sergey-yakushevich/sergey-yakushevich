@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -15,22 +15,20 @@
 
     <style>
       :root {
-        color-scheme: dark;
+        --sss-bg:           #FFFFFF;
+        --sss-surface:      #FAFAFA;
+        --sss-surface-sunk: #F0F0F0;
+        --sss-hairline:     rgba(0, 0, 0, 0.1);
 
-        --sss-bg:           #000000;
-        --sss-surface:      #0A0A0A;
-        --sss-surface-sunk: #1A1A1A;
-        --sss-hairline:     rgba(255, 255, 255, 0.1);
+        --sss-ink:          #0A0A0A;
+        --sss-ink-muted:    #525252;
+        --sss-ink-faint:    #A3A3A3;
+        --sss-ink-inverse:  #FFFFFF;
 
-        --sss-ink:          #FFFFFF;
-        --sss-ink-muted:    #A3A3A3;
-        --sss-ink-faint:    #6E6E6E;
-        --sss-ink-inverse:  #0A0A0A;
-
-        --sss-accent:       #EF6CB8;
-        --sss-accent-deep:  #F9A8D4;
-        --sss-accent-tint:      rgba(239, 108, 184, 0.1);
-        --sss-accent-tint-line: rgba(239, 108, 184, 0.25);
+        --sss-accent:       #DB2777;
+        --sss-accent-deep:  #BE185D;
+        --sss-accent-tint:      rgba(219, 39, 119, 0.08);
+        --sss-accent-tint-line: rgba(219, 39, 119, 0.3);
 
         --sss-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
 
@@ -56,6 +54,25 @@
         --sss-ease: cubic-bezier(0.2, 0, 0, 1);
         --sss-fast: 120ms;
         --sss-base: 200ms;
+      }
+
+      .dark {
+        color-scheme: dark;
+
+        --sss-bg:           #000000;
+        --sss-surface:      #0A0A0A;
+        --sss-surface-sunk: #1A1A1A;
+        --sss-hairline:     rgba(255, 255, 255, 0.1);
+
+        --sss-ink:          #FFFFFF;
+        --sss-ink-muted:    #A3A3A3;
+        --sss-ink-faint:    #6E6E6E;
+        --sss-ink-inverse:  #0A0A0A;
+
+        --sss-accent:       #EF6CB8;
+        --sss-accent-deep:  #F9A8D4;
+        --sss-accent-tint:      rgba(239, 108, 184, 0.1);
+        --sss-accent-tint-line: rgba(239, 108, 184, 0.25);
       }
 
       *, *::before, *::after { box-sizing: border-box; }
@@ -160,7 +177,68 @@
         border-bottom: 1px solid var(--sss-hairline);
       }
       .header .page { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; padding-top: 10px; padding-bottom: 10px; }
+      .header-actions { display: flex; align-items: center; gap: 8px; }
       .wordmark { font-weight: 700; letter-spacing: -0.02em; font-size: 18px; text-decoration: none; }
+
+      .theme-toggle {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px;
+        flex: none;
+        padding: 0;
+        border-radius: var(--sss-radius-sm);
+        border: 1px solid var(--sss-hairline);
+        background: transparent;
+        color: var(--sss-ink-muted);
+        cursor: pointer;
+        transition: background var(--sss-fast) var(--sss-ease), color var(--sss-fast) var(--sss-ease);
+      }
+      .theme-toggle:hover { background: var(--sss-surface-sunk); color: var(--sss-ink); }
+      .theme-toggle svg { width: 18px; height: 18px; }
+      .theme-toggle .icon-sun { display: none; }
+      .dark .theme-toggle .icon-sun { display: block; }
+      .dark .theme-toggle .icon-moon { display: none; }
+
+      .carousel-wrap { position: relative; }
+      .carousel {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-left: 2px;
+        padding: 2px 2px 12px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .carousel::-webkit-scrollbar { display: none; }
+      .carousel .card {
+        flex: 0 0 min(340px, 82vw);
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        overflow: hidden;
+      }
+      .carousel-img {
+        aspect-ratio: 16 / 10;
+        width: 100%;
+        object-fit: cover;
+        border-bottom: 1px solid var(--sss-hairline);
+      }
+      .carousel-body { display: flex; flex-direction: column; flex: 1; gap: 10px; padding: 18px; }
+      .carousel-body .row-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+      .carousel-nav {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 40px; height: 40px;
+        padding: 0;
+        border-radius: var(--sss-radius-sm);
+        border: 1px solid var(--sss-hairline);
+        background: transparent;
+        color: var(--sss-ink-muted);
+        cursor: pointer;
+        transition: background var(--sss-fast) var(--sss-ease), color var(--sss-fast) var(--sss-ease);
+      }
+      .carousel-nav:hover { background: var(--sss-surface-sunk); color: var(--sss-ink); }
+      .carousel-nav svg { width: 18px; height: 18px; }
 
       .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
       .dtable { width: 100%; border-collapse: collapse; font-size: var(--sss-text-body-sm); font-feature-settings: "tnum"; }
@@ -205,9 +283,40 @@
         .footer .page { flex-direction: column; align-items: flex-start; }
       }
     </style>
+
+    <%= javascript_tag do %>
+      (function () {
+        try {
+          var dark = localStorage.getItem('partners-theme') === 'dark';
+          if (dark) document.documentElement.classList.add('dark');
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+        } catch (e) {}
+      })();
+    <% end %>
   </head>
 
   <body>
     <%= yield %>
+
+    <%= javascript_tag do %>
+      document.addEventListener('click', function (event) {
+        var toggle = event.target.closest('[data-theme-toggle]');
+        if (toggle) {
+          var dark = document.documentElement.classList.toggle('dark');
+          document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+          try { localStorage.setItem('partners-theme', dark ? 'dark' : 'light'); } catch (e) {}
+          return;
+        }
+
+        var nav = event.target.closest('[data-carousel-nav]');
+        if (nav) {
+          var track = document.getElementById(nav.getAttribute('data-carousel-nav'));
+          if (!track) return;
+          var card = track.querySelector('.card');
+          var step = card ? card.getBoundingClientRect().width + 16 : 340;
+          track.scrollBy({ left: nav.hasAttribute('data-prev') ? -step : step, behavior: 'smooth' });
+        }
+      });
+    <% end %>
   </body>
 </html>
