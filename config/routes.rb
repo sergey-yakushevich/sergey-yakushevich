@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   post "track", to: "tracking#create"
   get "projects", to: "pages#projects"
   get "agents", to: "pages#agents"
-  get "test-partners", to: "pages#test_partners"
-  get "test-partners/:niche", to: "pages#test_partners", as: :test_partners_niche,
+  get "partners/trades", to: "pages#trades_partners"
+  get "test-partners", to: redirect("/partners/trades", status: 301)
+  get "test-partners/:niche", to: redirect("/partners/trades", status: 301),
       constraints: { niche: /adhd|marketplace-sellers|finance|job-search|no-fap/ }
 
   get "blog", to: "posts#index", as: :blog
